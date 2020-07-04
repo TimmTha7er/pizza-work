@@ -1,0 +1,156 @@
+// ----------------------------------------------
+//		header
+// ----------------------------------------------
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 55px 40px 32px 80px;
+
+  &::after {
+    position: absolute;
+    content: '';
+    width: 95%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 1px;
+    background: #f7f7f7;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @media only screen and (max-width: 768px) {
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 25px;
+  }
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.logo {
+  display: flex;
+
+  &__img {
+    height: 38px;
+    max-width: 100%;
+  }
+
+  &__text {
+    padding-left: 15px;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  &__subtitle {
+    color: $text-lighter;
+    font-weight: normal;
+    line-height: 1;
+
+    @media only screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    margin-bottom: 25px;
+  }
+}
+.user-bar {
+  flex-shrink: 0;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  padding: 14px 20px 14px 20px;
+  background-color: $accent-color;
+  cursor: pointer;
+  transition: background-color .25s ease, box-shadow .25s ease;
+
+  &:hover {
+    background-color: rgb(217, 99, 52);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+  }
+  &:active {
+    background-color: $accent-color;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  &__cart,
+  &__summ {
+    display: inline-block;
+    padding: 3px;
+  }
+
+  &__summ {
+    position: relative;
+    padding-right: 20px;
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 25px;
+      right: -8px;
+      top: 50%;
+      margin-top: -12.5px;
+      background: rgba(255, 255, 255, 0.25);
+
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
+      @media only screen and (max-width: 480px) {
+        display: block;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      right: 0px;
+      top: 3px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      padding-bottom: 7px;
+    }
+    @media only screen and (max-width: 480px) {
+      border: none;
+    }
+  }
+
+  &__cart {
+    position: relative;
+    padding-left: 40px;
+
+    &::before {
+      position: absolute;
+      left: 12px;
+      top: 3px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px 7px;
+    border-radius: 20px;
+  }
+  @media only screen and (max-width: 480px) {
+    flex-direction: row;
+    padding: 10px 35px;
+
+  }
+}

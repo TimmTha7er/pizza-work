@@ -1,0 +1,94 @@
+// ----------------------------------------------
+//		empty cart
+// ----------------------------------------------
+.empty-cart {
+  text-align: center;
+  padding: 160px 0;
+
+  @media only screen and (max-width: 1200px) {
+    padding: 100px 0;
+  }
+  @media only screen and (max-width: 992px) {
+    padding: 60px 0;
+  }
+  @media only screen and (max-width: 768px) {
+    padding: 50px 0;
+  }
+  @media only screen and (max-width: 480px) {
+    padding: 35px 0;
+  }
+
+  &__container {
+    max-width: 550px;
+    box-shadow: none;
+  }
+
+  &__title {
+    position: relative;
+
+    display: inline-block;
+    margin-bottom: 14px;
+    padding-right: 40px;
+
+    &::before {
+      position: absolute;
+      content: '\1F615';
+      right: 0;
+      top: 50%;
+      margin-top: -12.5px;
+      font-size: 25px;
+    }
+  }
+
+  &__text {
+    font-size: 18px;
+    color: #777777;
+    margin-bottom: 50px;
+    line-height: 1.4;
+
+    @media only screen and (max-width: 768px) {
+      font-size: 16px;
+    }
+    @media only screen and (max-width: 480px) {
+      font-size: 14px;
+    }
+  }
+
+  &__br {
+    @media only screen and (max-width: 480px) {
+      display: none;
+    }
+  }
+
+  &__img-wrap {
+    max-height: 255px;
+    max-width: 300px;
+    margin: 0 auto 70px auto;
+    overflow: hidden;
+  }
+
+  &__img {
+    max-width: 100%;
+  }
+
+  &__btn {
+    background-color: #282828;
+    max-width: 210px;
+    margin: 0 auto;
+    padding: 16px 34px 16px 34px;
+    letter-spacing: 0.3px;
+    transition: background-color .25s ease, box-shadow .25s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+    }
+    &:active {
+      box-shadow: inset 0px 4px 8px rgba(255, 255, 255, 0.3);
+    }
+
+    @media only screen and (max-width: 480px) {
+      max-width: none;
+    }
+  }
+}
