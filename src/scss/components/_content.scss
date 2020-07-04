@@ -142,6 +142,7 @@
     color: $accent-color;
     font-weight: normal;
     border-bottom: 1px dashed #fe5f1e;
+    cursor: pointer;
   }
 }
 
@@ -231,6 +232,10 @@
     }
     &_disable {
       color: $disable;
+
+      &:hover {
+        box-shadow: none;
+      }
     }
   }
 

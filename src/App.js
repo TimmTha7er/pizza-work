@@ -1,8 +1,5 @@
 import React from 'react';
-import Header from './components/Header';
-import Cart from './components/Cart';
-import Content from './components/Content';
-import EmptyCart from './components/EmptyCart';
+import { Header, Content, Cart, EmptyCart } from "./components";
 
 import './scss/index.scss';
 
