@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header, EmptyCart } from './components';
 import { Home, Cart } from './pages';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import './scss/index.scss';
 
-// немного попарвить верстку:
-//    1 header   user-bar вернуть border-radius на разрешениях меньше 480 и padding-top увеличить
-//    2 cart      сделать нормальный hover на кнопках '+' '-' 'x'
-
-
+import PizzaService from './services/pizza-service';
 
 const NotFound = () => {
   return (
@@ -21,6 +16,18 @@ const NotFound = () => {
 };
 
 const App = () => {
+  const [pissas, setPissas] = useState([]);
+
+  const onPizzasLoaded = (pissas) => {
+    setPissas(pissas);
+    console.log(pissas)
+  };
+
+  useEffect(() => {
+    const pizzaService = new PizzaService();
+    pizzaService.getPizzas().then((onPizzasLoaded));
+  }, []);
+
   return (
     <Router>
       <div className='container'>

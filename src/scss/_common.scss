@@ -45,9 +45,10 @@ body {
   text-decoration: none;
   color: $text-color;
   transition: color 0.25s ease;
-  scroll-behavior: smooth !important;
+  outline: none;
 
   &:link {
+    outline: none;
   }
   &:visited {
   }
