@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import CartItem from './CartItem';
+import CartItem from '../components/CartItem';
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const pizzasList = [
@@ -39,10 +40,6 @@ const Cart = () => {
           {pizzasList.map((pizza, index) => {
             return <CartItem key={index} pizza={pizza} />;
           })}
-          {/* <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem /> */}
         </div>
 
         <div className='cart__details'>
@@ -57,12 +54,12 @@ const Cart = () => {
         </div>
 
         <div className='cart__btns-block'>
-          <a href='/' className='cart__btn-back button icon-left-open'>
+          <Link to='/' className='cart__btn-back button icon-left-open'>
             Вернуться <span className='cart__btn-back_hidden'>назад</span>
-          </a>
-          <a href='/' className='cart__btn-pay button'>
+          </Link>
+          <Link to='/' className='cart__btn-pay button'>
             Оплатить <span className='cart__btn-pay_hidden'>сейчас</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

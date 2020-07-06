@@ -1,27 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import cln from 'classnames';
+
+const categories = ['популярности', 'цене', 'алфавиту'];
 
 const Sort = () => {
   const [activeItem, setActiveItem] = useState(0);
   const [visiblePopup, setVisiblePopup] = useState(false);
-	const categories = ['популярности', 'цене', 'алфавиту'];
-	
-	const onSelectedCategoryClick = () => {
-		setVisiblePopup((prev) => !prev)
-	}
+  const sortRef = useRef();
+  const activeLabel = categories[activeItem];
 
-	const onPopupItemClick = (index) => () => {
-    setActiveItem(index);
+  const onSelectedCategoryClick = () => {
+    setVisiblePopup((prev) => !prev);
   };
 
+  const onPopupItemClick = (index) => () => {
+    setActiveItem(index);
+    setVisiblePopup(false);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (!e.path.includes(sortRef.current)) {
+      setVisiblePopup(false);
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick);
+  }, []);
+
   return (
-    <div className='sort icon-up-dir'>
+    <div ref={sortRef} className={cln('sort', {
+      'icon-up-dir': visiblePopup,
+      'icon-down-dir': !visiblePopup
+    }) }>
       <span className='sort__label'>Сортировка по:&nbsp;</span>
       <span
+        
         onClick={onSelectedCategoryClick}
         className='sort__selected-item'
       >
-        {categories[activeItem]}
+        {activeLabel}
       </span>
 
       {visiblePopup && (

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import emptyCartImg from '../img/cart/empty-cart.png';
+import { Link } from "react-router-dom";
 
 const EmptyCart = () => {
   return (
@@ -20,7 +21,7 @@ const EmptyCart = () => {
             className='empty-cart__img'
           />
         </div>
-        <div className='empty-cart__btn button'>Вернуться назад</div>
+        <Link to='/' className='empty-cart__btn button'>Вернуться назад</Link>
       </div>
     </section>
   );
