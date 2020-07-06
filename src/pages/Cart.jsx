@@ -2,29 +2,14 @@ import React, { useState } from 'react';
 import CartItem from '../components/CartItem';
 import { Link } from "react-router-dom";
 
-const Cart = () => {
-  const pizzasList = [
-    {
-      name: 'Сырный цыпленок',
-      base: 'тонкое',
-      size: '26',
-      price: 395,
-      count: 1,
-    },
-    {
-      name: 'Чизбургер-пицца',
-      base: 'традиционное',
-      size: '40',
-      price: 500,
-      count: 3,
-    },
-  ];
 
-  const totalCount = pizzasList.reduce((prev, cur) => {
+const Cart = ({items}) => {
+
+  const totalCount = items.reduce((prev, cur) => {
     return prev + cur.count;
   }, 0);
 
-  const totalPrice = pizzasList.reduce((prev, cur) => {
+  const totalPrice = items.reduce((prev, cur) => {
     return prev + cur.count * cur.price;
   }, 0);
 
@@ -37,8 +22,8 @@ const Cart = () => {
         </div>
 
         <div className='shopping-list cart__shopping-list'>
-          {pizzasList.map((pizza, index) => {
-            return <CartItem key={index} pizza={pizza} />;
+          {items.map((pizza, index) => {
+            return <CartItem key={index} {...pizza} />;
           })}
         </div>
 

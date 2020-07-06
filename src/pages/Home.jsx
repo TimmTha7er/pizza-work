@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 
-const Content = () => {
+import { pizzaContext } from '../components/pizza-service-context';
+
+const Home = () => {
+  const [pizzas] = useContext(pizzaContext);
+  // console.log(pizzas)
+
   return (
     <section className='content'>
       <div className='content__top-line'>
@@ -13,19 +18,13 @@ const Content = () => {
       <div className='content__body'>
         <h2 className='content__title'>Все пиццы</h2>
         <div className='content__pizza-list'>
-          <Pizza />
-          <Pizza />
-          <Pizza />
-          <Pizza />
-          <Pizza />
-          <Pizza />
-          <Pizza />
-          <Pizza />
-          <Pizza />
+          {pizzas.map((pizza) => {
+            return <Pizza key={pizza.id} {...pizza} />;
+          })}
         </div>
       </div>
     </section>
   );
 };
 
-export default Content;
+export default Home;

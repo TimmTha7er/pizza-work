@@ -260,6 +260,10 @@
     }
     &_disable {
       color: $disable;
+      
+      &:hover {
+        box-shadow: none;
+      }
     }
   }
 

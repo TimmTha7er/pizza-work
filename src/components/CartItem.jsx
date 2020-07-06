@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
-import pizzaImg from '../img/content/cheese-pizza.png';
 
-const CartItem = ({pizza}) => {
-  // const pizza = {
-  //   name: 'Чизбургер цыпленок',
-  //   base: 'тонкое',
-  //   size: '26',
-  //   price: 395,
-  //   count: 2,
-  // };
-
-  const [count, setCount] = useState(pizza.count);
+const CartItem = ({imageUrl, name, base, size, price}) => {
+  const [count, setCount] = useState(0);
 
   const onAddBtnClick = () => {
     setCount((prev) => prev + 1);
@@ -26,23 +17,25 @@ const CartItem = ({pizza}) => {
     setCount(0);
   };
 
-  if (count > 0) {
+  console.log(imageUrl, name, base, size, price, count)
+
+  // if (count > 0) {
     return (
       <div className='shopping-list__item'>
         <div className='shopping-list__item-descr'>
           <div className='shopping-list__item-img-wrap'>
             <img
               className='shopping-list__item-img'
-              src={pizzaImg}
+              src={imageUrl}
               alt='pizza'
             />
           </div>
           <div className='shopping-list__item-info'>
-            <h3 className='shopping-list__item-name'>{pizza.name}</h3>
+            <h3 className='shopping-list__item-name'>{name}</h3>
             <span className='shopping-list__item-base'>
-              {pizza.base} тесто,{' '}
+              {base} тесто,{' '}
             </span>
-            <span className='shopping-list__item-size'>{pizza.size} см.</span>
+            <span className='shopping-list__item-size'>{size} см.</span>
           </div>
         </div>
         <div className='shopping-list__btns-block'>
@@ -57,7 +50,7 @@ const CartItem = ({pizza}) => {
           ></div>
         </div>
         <div className='shopping-list__item-price icon-rouble'>
-          {pizza.price * count}
+          {price * count}
         </div>
         <div
           onClick={onDeleteBtnClick}
@@ -65,9 +58,9 @@ const CartItem = ({pizza}) => {
         ></div>
       </div>
     );
-  } else {
-    return null;
-  }
+  // } else {
+  //   return null;
+  // }
 };
 
 export default CartItem;
