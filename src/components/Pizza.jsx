@@ -9,22 +9,23 @@ const findActiveElement = (elements) => {
   });
 };
 
-const Pizza = ({ imageUrl, name, bases, sizes, price }) => {
+const Pizza = ({ id, imageUrl, name, bases, sizes, price, count }) => {
   const [activeBase, setActiveBase] = useState(findActiveElement(bases));
   const [activeSize, setActiveSize] = useState(findActiveElement(sizes));
   // const [count, setCount] = useState(0);
 
   const handleOnAddPizza = useContext(pizzaContext)[1];
-  const pizzasCount = useContext(pizzaContext)[2];
+  // const pizzasCount = useContext(pizzaContext)[2];
 
   const onBtnClick = () => {
     handleOnAddPizza({
+      id: id,
       imageUrl: imageUrl,
       name: name,
       base: bases[activeBase].name,
       size: sizes[activeSize].name,
       price: price,
-      // count: pizzasCount,
+      count: 1,
     });
   };
 
@@ -85,13 +86,15 @@ const Pizza = ({ imageUrl, name, bases, sizes, price }) => {
 
       <div className='pizza__bot-line'>
         <div className='pizza__price icon-rouble'>{price}</div>
-        <div className='pizza__btn icon-plus'>
-          <span onClick={() => onBtnClick()} className='pizza__btn-text'>
-            Добавить
-          </span>
-          <div className='pizza__count-wrap'>
-            <span className='pizza__count'>{pizzasCount}</span>
-          </div>
+        <div onClick={() => onBtnClick()} className='pizza__btn icon-plus'>
+          <span className='pizza__btn-text'>Добавить</span>
+          {count > 0 ? (
+            <div className='pizza__count-wrap'>
+              <span className='pizza__count'>{count}</span>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>

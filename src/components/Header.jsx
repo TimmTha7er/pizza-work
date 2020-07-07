@@ -1,8 +1,8 @@
 import React from 'react';
-import headerLogo from '../img/header/header-logo.png'
-import { Link } from "react-router-dom";
+import headerLogo from '../img/header/header-logo.png';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ totalCount, totalPrice }) => {
   return (
     <header className='header'>
       <Link to='/' className='logo link'>
@@ -12,9 +12,9 @@ const Header = () => {
           <h4 className='logo__subtitle'>самая вкусная пицца во вселенной</h4>
         </div>
       </Link>
-      <Link to='/cart' className='user-bar'>
-        <div className='user-bar__summ icon-rouble'>520</div>
-        <div className='user-bar__cart icon-basket'>3</div>
+      <Link to={totalCount > 0 ? '/cart' : 'empty-cart'} className='user-bar'>
+        <div className='user-bar__summ icon-rouble'>{totalPrice}</div>
+        <div className='user-bar__cart icon-basket'>{totalCount}</div>
       </Link>
     </header>
   );

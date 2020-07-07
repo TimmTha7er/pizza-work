@@ -135,6 +135,7 @@ h4 {
   border-radius: 30px;
   color: #fff;
   text-decoration: none;
+  user-select: none;
   cursor: pointer;
 
   @media only screen and (max-width: 768px) {
