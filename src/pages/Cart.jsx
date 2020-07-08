@@ -1,40 +1,32 @@
-import React, { useState } from 'react';
-import CartItem from '../components/CartItem';
+import React from 'react';
+import ShoppingList from '../components/ShoppingList';
 import { Link } from 'react-router-dom';
 
 const Cart = ({
-  items = [],
+  cartPizzasList ,
   totalCount,
   totalPrice,
-  onClearCart,
-  onDeletePizza,
-  onAddPizza,
-  onMinusPizza,
+  handleClearCart,
+  handleDeletePizza,
+  handlePlusPizza,
+  handleMinusPizza,
 }) => {
-
   return (
     <section className='cart'>
       <div className='container cart__container'>
         <div className='cart__top-line'>
           <h2 className='cart__title icon-basket'>Корзина</h2>
-          <div onClick={onClearCart} className='cart__clear icon-trash-empty'>
+          <div onClick={handleClearCart} className='cart__clear icon-trash-empty'>
             Очистить корзину
           </div>
         </div>
 
-        <div className='shopping-list cart__shopping-list'>
-          {items.map((pizza, index) => {
-            return (
-              <CartItem
-                key={index}
-                {...pizza}
-                onDeletePizza={onDeletePizza}
-                onAddPizza={onAddPizza}
-                onMinusPizza={onMinusPizza}
-              />
-            );
-          })}
-        </div>
+        <ShoppingList
+          cartPizzasList={cartPizzasList}
+          handleDeletePizza={handleDeletePizza}
+          handlePlusPizza={handlePlusPizza}
+          handleMinusPizza={handleMinusPizza}
+        />
 
         <div className='cart__details'>
           <div className='cart__total'>

@@ -57,13 +57,12 @@
     border-radius: 30px;
     font-weight: bold;
     cursor: pointer;
+    user-select: none;
     transition: background-color 0.25s ease, box-shadow 0.25s ease;
 
     &_active {
       color: #fff;
       background-color: #282828;
-
-     
     }
 
     &:hover {
@@ -93,7 +92,6 @@
       box-shadow: inset 0px 4px 8px rgba(255, 255, 255, 0.5);
     }
   }
-
 
   &__list {
     @media only screen and (max-width: 1200px) {
@@ -260,7 +258,7 @@
     }
     &_disable {
       color: $disable;
-      
+
       &:hover {
         box-shadow: none;
       }

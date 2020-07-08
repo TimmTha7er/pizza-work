@@ -1,131 +1,101 @@
 import React, { useState, useEffect } from 'react';
-import { Header, EmptyCart, NotFound } from './components';
 import { Home, Cart } from './pages';
+import { Header, EmptyCart, NotFound } from './components';
+import PizzaService from './services/pizza-service';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './scss/index.scss';
-import PizzaService from './services/pizza-service';
-import { PizzaServiceProvider } from './components/pizza-service-context';
-
 
 // для кнопки добавления
 // 1 - поправить верстку
 // 2 - поправить кол-во добавленных пицц
 
 // для body
-// сделать фильтр 
-// сделать сортировку 
+// сделать фильтр
+// сделать сортировку
 
 const App = () => {
-  const [pizzas, setPizzas] = useState([]);
-
-  const [totalCount, setTotalCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [homePizzasList, setHomePizzasList] = useState([]);
   const [cartPizzasList, setCartPizzasList] = useState([]);
 
-  const onClearCart = () => {
-    setTotalCount(0);
-    setTotalPrice(0);
+  const onPizzasLoaded = (data) => {
+    setHomePizzasList(data.pizzas);
+  };
+
+  useEffect(() => {
+    const pizzaService = new PizzaService();
+    pizzaService.getPizzas().then(onPizzasLoaded);
+  }, []);
+
+  const totalCount = cartPizzasList.reduce((prev, cur) => {
+    return prev + cur.count;
+  }, 0);
+
+  const totalPrice = cartPizzasList.reduce((prev, cur) => {
+    return prev + cur.price * cur.count;
+  }, 0);
+
+  const handleClearCart = () => {
     setCartPizzasList([]);
   };
 
-  const onMinusPizza = (pizzaId) => {
-    // изменяем totalCount и totalPrice
-    setTotalCount((prevCount) => prevCount - 1);
-    setTotalPrice((prevPrice) => prevPrice - 1);
-
+  const changePizzasCount = (cartId, count) => {
     setCartPizzasList((prevPizzasList) => {
-      const isInArray = prevPizzasList.some((el) => el.pizzaId === pizzaId);
+      // находим индекс элемента
+      const idx = prevPizzasList.findIndex((el) => el.cartId === cartId);
+      const oldItem = prevPizzasList[idx];
+      // new item
+      const newItem = { ...oldItem, count: oldItem.count + count };
 
-      // если есть пицца в массиве с этим id
-      if (isInArray) {
-        // находим индекс элемента
-        const idx = prevPizzasList.findIndex((el) => el.pizzaId === pizzaId);
-        const oldItem = prevPizzasList[idx];
-        // new item
-        const newItem = { ...oldItem, count: oldItem.count - 1 };
+      // создаем новый массив, удаляя ненужный элемент
+      const newList = [
+        ...prevPizzasList.slice(0, idx),
+        newItem,
+        ...prevPizzasList.slice(idx + 1),
+      ];
 
-        // создаем новый массив, удаляя ненужный элемент
-        const newList = [
-          ...prevPizzasList.slice(0, idx),
-          newItem,
-          ...prevPizzasList.slice(idx + 1),
-        ];
-
-        return newList;
-      }
+      return newList;
     });
   };
 
-  const onAddPizza = (pizzaId) => {
-    // изменяем totalCount и totalPrice
-    setTotalCount((prevCount) => prevCount + 1);
-    setTotalPrice((prevPrice) => prevPrice + 1);
+  const handleMinusPizza = (cartId) => {
+    changePizzasCount(cartId, -1);
+  };
 
+  const handlePlusPizza = (cartId) => {
+    changePizzasCount(cartId, +1);
+  };
+
+  const handleDeletePizza = (cartId) => {
     setCartPizzasList((prevPizzasList) => {
-      const isInArray = prevPizzasList.some((el) => el.pizzaId === pizzaId);
+      // находим индекс элемента
+      const idx = prevPizzasList.findIndex((el) => el.cartId === cartId);
 
-      // если есть пицца в массиве с этим id
-      if (isInArray) {
-        // находим индекс элемента
-        const idx = prevPizzasList.findIndex((el) => el.pizzaId === pizzaId);
-        const oldItem = prevPizzasList[idx];
-        // new item
-        const newItem = { ...oldItem, count: oldItem.count + 1 };
+      // создаем новый массив, удаляя ненужный элемент
+      const newList = [
+        ...prevPizzasList.slice(0, idx),
+        ...prevPizzasList.slice(idx + 1),
+      ];
 
-        // создаем новый массив, удаляя ненужный элемент
-        const newList = [
-          ...prevPizzasList.slice(0, idx),
-          newItem,
-          ...prevPizzasList.slice(idx + 1),
-        ];
-
-        return newList;
-      }
+      return newList;
     });
   };
 
-  const onDeletePizza = (pizzaId) => {
-    setCartPizzasList((prevPizzasList) => {
-      const isInArray = prevPizzasList.some((el) => el.pizzaId === pizzaId);
-
-      // если есть пицца в массиве с этим id
-      if (isInArray) {
-        // находим индекс элемента
-        const idx = prevPizzasList.findIndex((el) => el.pizzaId === pizzaId);
-
-        // уменьшить totalCount на кол-во удаленных пицц
-        // изменить totalPrice
-        const { count, price } = prevPizzasList[idx];
-        setTotalCount((prevCount) => prevCount - count);
-        setTotalPrice((prevPrice) => prevPrice - price * count);
-
-        // создаем новый массив, удаляя ненужный элемент
-        const newList = [
-          ...prevPizzasList.slice(0, idx),
-          ...prevPizzasList.slice(idx + 1),
-        ];
-
-        return newList;
-      }
-    });
-  };
-
-  const handleOnAddPizza = (pizza) => {
-    setTotalCount((prevCount) => prevCount + 1);
-    setTotalPrice((prevPrice) => prevPrice + pizza.price);
-
+  const handleAddPizza = (pizza) => {
     setCartPizzasList((prevPizzasList) => {
       const isInArray = prevPizzasList.some((item) => {
         return (
-          item.id === pizza.id &&
+          item.pizzaId === pizza.pizzaId &&
           item.base === pizza.base &&
-          item.size === pizza.size 
+          item.size === pizza.size
         );
       });
 
+      // change pizza count
       if (isInArray) {
         // old item
-        const idx = prevPizzasList.findIndex((el) => el.id === pizza.id);
+        const idx = prevPizzasList.findIndex(
+          (el) => el.pizzaId === pizza.pizzaId
+        );
         const oldItem = prevPizzasList[idx];
         // new item
         const newItem = { ...oldItem, count: oldItem.count + 1 };
@@ -139,56 +109,61 @@ const App = () => {
 
         return newPizzasList;
       } else {
+        // add new pizza
+        const { price, name, imageUrl } = homePizzasList[pizza.pizzaId];
+
         return [
           ...prevPizzasList,
-          { ...pizza, pizzaId: prevPizzasList.length },
+          {
+            ...pizza,
+            cartId: prevPizzasList.length,
+            name: name,
+            price: price,
+            imageUrl: imageUrl,
+            count: 1,
+          },
         ];
       }
     });
   };
 
-  const onPizzasLoaded = (data) => {
-    setPizzas(data.pizzas);
-  };
-
-  useEffect(() => {
-    const pizzaService = new PizzaService();
-    pizzaService.getPizzas().then(onPizzasLoaded);
-  }, []);
-
   return (
-    <PizzaServiceProvider value={[pizzas, handleOnAddPizza]}>
-      <Router>
-        <div className='container'>
-          <Header totalCount={totalCount} totalPrice={totalPrice} />
-          <main>
-            <Switch>
-              <Route
-                path='/'
-                render={() => <Home pizzasList={cartPizzasList} />}
-                exact
-              />
-              <Route
-                path='/cart'
-                render={() => (
-                  <Cart
-                    items={cartPizzasList}
-                    totalCount={totalCount}
-                    totalPrice={totalPrice}
-                    onClearCart={onClearCart}
-                    onDeletePizza={onDeletePizza}
-                    onAddPizza={onAddPizza}
-                    onMinusPizza={onMinusPizza}
-                  />
-                )}
-              />
-              <Route path='/empty-cart' component={EmptyCart} />
-              <Route component={NotFound} />
-            </Switch>
-          </main>
-        </div>
-      </Router>
-    </PizzaServiceProvider>
+    <Router>
+      <div className='container'>
+        <Header totalCount={totalCount} totalPrice={totalPrice} />
+        <main>
+          <Switch>
+            <Route
+              path='/'
+              render={() => (
+                <Home
+                  cartPizzasList={cartPizzasList}
+                  homePizzasList={homePizzasList}
+                  handlePlusPizza={handleAddPizza}
+                />
+              )}
+              exact
+            />
+            <Route
+              path='/cart'
+              render={() => (
+                <Cart
+                  cartPizzasList={cartPizzasList}
+                  totalCount={totalCount}
+                  totalPrice={totalPrice}
+                  handleClearCart={handleClearCart}
+                  handleDeletePizza={handleDeletePizza}
+                  handlePlusPizza={handlePlusPizza}
+                  handleMinusPizza={handleMinusPizza}
+                />
+              )}
+            />
+            <Route path='/empty-cart' component={EmptyCart} />
+            <Route component={NotFound} />
+          </Switch>
+        </main>
+      </div>
+    </Router>
   );
 };
 

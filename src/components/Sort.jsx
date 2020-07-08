@@ -9,6 +9,10 @@ const Sort = () => {
   const sortRef = useRef();
   const activeLabel = categories[activeItem];
 
+  useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick);
+  }, []);
+
   const onSelectedCategoryClick = () => {
     setVisiblePopup((prev) => !prev);
   };
@@ -24,21 +28,16 @@ const Sort = () => {
     }
   };
 
-  useEffect(() => {
-    document.body.addEventListener('click', handleOutsideClick);
-  }, []);
-
   return (
-    <div ref={sortRef} className={cln('sort', {
-      'icon-up-dir': visiblePopup,
-      'icon-down-dir': !visiblePopup
-    }) }>
+    <div
+      ref={sortRef}
+      className={cln('sort', {
+        'icon-up-dir': visiblePopup,
+        'icon-down-dir': !visiblePopup,
+      })}
+    >
       <span className='sort__label'>Сортировка по:&nbsp;</span>
-      <span
-        
-        onClick={onSelectedCategoryClick}
-        className='sort__selected-item'
-      >
+      <span onClick={onSelectedCategoryClick} className='sort__selected-item'>
         {activeLabel}
       </span>
 

@@ -1,28 +1,24 @@
-import React, { useState, useContext } from 'react';
-// import { pizzaContext } from '../components/pizza-service-context';
+import React from 'react';
 
 const CartItem = ({
-  id,
+  cartId,
   imageUrl,
   name,
   base,
   size,
   price,
   count,
-  onDeletePizza,
-  onAddPizza,
-  pizzaId,
-  onMinusPizza,
+  handleDeletePizza,
+  handlePlusPizza,
+  handleMinusPizza,
 }) => {
-  // const handleOnAddPizza = useContext(pizzaContext)[1];
-
   const onAddBtnClick = () => {
-    onAddPizza(pizzaId);
+    handlePlusPizza(cartId);
   };
 
   const onMinusBtnClick = () => {
     if (count > 1) {
-      onMinusPizza(pizzaId);
+      handleMinusPizza(cartId);
     }
   };
 
@@ -53,7 +49,7 @@ const CartItem = ({
         {price * count}
       </div>
       <div
-        onClick={() => onDeletePizza(pizzaId)}
+        onClick={() => handleDeletePizza(cartId)}
         className='shopping-list__item-delete icon-cancel'
       ></div>
     </div>

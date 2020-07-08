@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
 import cln from 'classnames';
 
+const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые'];
+
 const Categories = () => {
   const [activeItem, setActiveItem] = useState(0);
-  const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые'];
 
   const onItemClick = (index) => () => {
     setActiveItem(index);
   };
 
+  const categoriesList = categories.map((name, index) => {
+    return (
+      <li
+        onClick={onItemClick(index)}
+        key={`${index}_${name}`}
+        className={cln('categories__item', {
+          'categories__item_active': index === activeItem,
+        })}
+      >
+        {name}
+      </li>
+    );
+  })
+
   return (
     <div className='categories'>
       <ul className='categories__list'>
-        {categories.map((name, index) => {
-          return (
-            <li
-              onClick={onItemClick(index)}
-              key={`${index}_${name}`}
-              className={cln('categories__item', {
-                categories__item_active: index === activeItem,
-              })}
-            >
-              {name}
-            </li>
-          );
-        })}
+        {categoriesList}
       </ul>
     </div>
   );

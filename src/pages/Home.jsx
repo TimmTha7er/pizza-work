@@ -1,14 +1,8 @@
-import React, { useContext } from 'react';
-import Categories from '../components/Categories';
-import Sort from '../components/Sort';
-import Pizza from '../components/Pizza';
+import React from 'react';
+import { Categories, Sort, PizzasList } from '../components';
 
-import { pizzaContext } from '../components/pizza-service-context';
-
-const Home = ({ pizzasList }) => {
-  const [pizzas] = useContext(pizzaContext);
-  // const pizzasList = useContext(pizzaContext)[2];
-  console.log(pizzasList);
+const Home = ({ cartPizzasList, homePizzasList, handlePlusPizza }) => {
+  console.log(cartPizzasList);
 
   return (
     <section className='content'>
@@ -18,15 +12,11 @@ const Home = ({ pizzasList }) => {
       </div>
       <div className='content__body'>
         <h2 className='content__title'>Все пиццы</h2>
-        <div className='content__pizza-list'>
-          {pizzas.map((pizza) => {        
-            const idx = pizzasList.findIndex((el) => el.id === pizza.id);
-            const element = pizzasList[idx];
-            const count = element ? element.count : 0; 
-
-            return <Pizza key={pizza.id}  {...pizza}  count={count} />;
-          })}
-        </div>
+        <PizzasList
+          cartPizzasList={cartPizzasList}
+          homePizzasList={homePizzasList}
+          handlePlusPizza={handlePlusPizza}
+        />
       </div>
     </section>
   );
