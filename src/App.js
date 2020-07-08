@@ -5,20 +5,21 @@ import PizzaService from './services/pizza-service';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './scss/index.scss';
 
-// для кнопки добавления
-// 1 - поправить верстку
-// 2 - поправить кол-во добавленных пицц
-
 // для body
-// сделать фильтр
-// сделать сортировку
+// доделать фильтр
+
+// добавить Redux
 
 const App = () => {
   const [homePizzasList, setHomePizzasList] = useState([]);
   const [cartPizzasList, setCartPizzasList] = useState([]);
 
+  const [copyPizzasList, setCopyPizzasList] = useState([]);
+
   const onPizzasLoaded = (data) => {
-    setHomePizzasList(data.pizzas);
+    const sortPizzasList = sortPizza(data.pizzas, 'популярности');
+    setHomePizzasList(sortPizzasList);
+    setCopyPizzasList(sortPizzasList);
   };
 
   useEffect(() => {
@@ -127,6 +128,59 @@ const App = () => {
     });
   };
 
+  const sortPizza = (oldList, category) => {
+    const newList = [...oldList];
+
+    switch (category) {
+      case 'популярности':
+        newList.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'цене':
+        newList.sort((a, b) => b.price - a.price);
+        break;
+      case 'алфавиту':
+        newList.sort((a, b) => {
+          const x = a.name.toLowerCase();
+          const y = b.name.toLowerCase();
+
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+
+      default:
+        break;
+    }
+
+    return newList;
+  };
+
+  const handleSortPizza = (category) => {
+    const sortPizzasList = sortPizza(homePizzasList, category);
+
+    setHomePizzasList(sortPizzasList);
+  };
+
+  const handleFilterPizza = (index) => {
+    if (index === 0) {
+      setHomePizzasList(copyPizzasList);
+      return;
+    }
+
+    const newList = [...copyPizzasList].filter((el) => {
+      return el.category === index;
+    });
+
+    console.log('body', newList)
+
+    setHomePizzasList(newList);
+  };
+
   return (
     <Router>
       <div className='container'>
@@ -140,6 +194,8 @@ const App = () => {
                   cartPizzasList={cartPizzasList}
                   homePizzasList={homePizzasList}
                   handlePlusPizza={handleAddPizza}
+                  handleSortPizza={handleSortPizza}
+                  handleFilterPizza={handleFilterPizza}
                 />
               )}
               exact

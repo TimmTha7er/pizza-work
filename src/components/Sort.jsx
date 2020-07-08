@@ -3,7 +3,36 @@ import cln from 'classnames';
 
 const categories = ['популярности', 'цене', 'алфавиту'];
 
-const Sort = () => {
+  // по популярности
+  // console.log(
+  //   'sort',
+  //   homePizzasList.sort((a, b) => b.rating - a.rating)
+  // );
+
+  // по цене
+  // console.log(
+  //   'sort',
+  //   homePizzasList.sort((a, b) => b.price - a.price)
+  // );
+
+  // по алфавиту
+  // console.log(
+  //   'sort',
+    // homePizzasList.sort((a, b) => {
+    //   const x = a.name.toLowerCase();
+    //   const y = b.name.toLowerCase();
+
+    //   if (x < y) {
+    //     return -1;
+    //   }
+    //   if (x > y) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // })
+  // );
+
+const Sort = ({handleSortPizza}) => {
   const [activeItem, setActiveItem] = useState(0);
   const [visiblePopup, setVisiblePopup] = useState(false);
   const sortRef = useRef();
@@ -20,6 +49,8 @@ const Sort = () => {
   const onPopupItemClick = (index) => () => {
     setActiveItem(index);
     setVisiblePopup(false);
+
+    handleSortPizza(categories[index]);
   };
 
   const handleOutsideClick = (e) => {

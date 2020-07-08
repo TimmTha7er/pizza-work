@@ -87,7 +87,7 @@
     border: 1px solid $text-lighter;
     color: $text-lighter;
     background-color: transparent;
-    transition: background-color .25s ease, box-shadow .25s ease;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.01);
@@ -110,7 +110,7 @@
 
   &__btn-pay {
     padding: 20px 40px 16px 40px;
-    transition: background-color .25s ease, box-shadow .25s ease;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
 
     &:hover {
       background-color: rgb(217, 99, 52);
@@ -184,14 +184,18 @@
 
   &__item-descr {
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding-right: 50px;
+    flex-grow: 1;
+    max-width: 50%;
 
     @media only screen and (max-width: 768px) {
+      flex-grow: 1;
+      max-width: 60%;
       padding-right: 0;
     }
     @media only screen and (max-width: 480px) {
+      flex-grow: 0;
+      max-width: 90%;
       margin-bottom: 5px;
     }
   }
@@ -261,7 +265,7 @@
     width: 32px;
     font-size: 16px;
     cursor: pointer;
-    transition: box-shadow .25s ease, background-color .25s ease;
+    transition: box-shadow 0.25s ease, background-color 0.25s ease;
 
     &::before {
       position: absolute;
@@ -274,7 +278,6 @@
 
     &:hover {
       background-color: rgba(228, 214, 214, 0.3);
-    
     }
     &:active {
       box-shadow: inset 0px 0px 2px 2px rgba(217, 99, 52, 0.4);

@@ -2,10 +2,12 @@ import React from 'react';
 import Pizza from './Pizza';
 
 const PizzasList = ({ cartPizzasList, homePizzasList, handlePlusPizza }) => {
-  const list = homePizzasList.map((pizza) => {
-    const idx = cartPizzasList.findIndex((el) => el.id === pizza.id);
-    const element = cartPizzasList[idx];
-    const count = element ? element.count : 0;
+
+
+  const pizzasList = homePizzasList.map((pizza) => {
+    const count = cartPizzasList.reduce((prev, cur) => {
+      return cur.pizzaId === pizza.id ? prev + cur.count : prev;
+    }, 0);
 
     return (
       <Pizza
@@ -17,7 +19,7 @@ const PizzasList = ({ cartPizzasList, homePizzasList, handlePlusPizza }) => {
     );
   });
 
-  return <div className='content__pizza-list'>{list}</div>;
+  return <div className='content__pizza-list'>{pizzasList}</div>;
 };
 
 export default PizzasList;

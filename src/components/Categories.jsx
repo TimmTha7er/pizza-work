@@ -3,11 +3,15 @@ import cln from 'classnames';
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые'];
 
-const Categories = () => {
+const Categories = ({ handleFilterPizza }) => {
   const [activeItem, setActiveItem] = useState(0);
 
   const onItemClick = (index) => () => {
-    setActiveItem(index);
+    if (activeItem !== index) {
+      setActiveItem(index);
+
+      handleFilterPizza(index);
+    }
   };
 
   const categoriesList = categories.map((name, index) => {
@@ -16,19 +20,17 @@ const Categories = () => {
         onClick={onItemClick(index)}
         key={`${index}_${name}`}
         className={cln('categories__item', {
-          'categories__item_active': index === activeItem,
+          categories__item_active: index === activeItem,
         })}
       >
         {name}
       </li>
     );
-  })
+  });
 
   return (
     <div className='categories'>
-      <ul className='categories__list'>
-        {categoriesList}
-      </ul>
+      <ul className='categories__list'>{categoriesList}</ul>
     </div>
   );
 };

@@ -302,6 +302,7 @@
     margin-bottom: 10px;
     border-radius: 30px;
     border: 1px solid $accent-color;
+    max-height: 40px;
     cursor: pointer;
     user-select: none;
     transition: box-shadow 0.25s ease, background-color 0.25s ease,
