@@ -7,11 +7,11 @@ import { App, ErrorBoundary } from './components';
 import PizzaStoreService from './services/PizzaStoreService';
 import { PizzaStoreServiceProvider } from './components/PizzaStoreServiceContext';
 
-// import store from './store';
+import store from './store';
 const pizzaStoreService = new PizzaStoreService();
 
 ReactDOM.render(
-  // <Provider store={store}>
+  <Provider store={store}>
     <ErrorBoundary>
       <PizzaStoreServiceProvider value={pizzaStoreService}>
         <Router>
@@ -19,7 +19,6 @@ ReactDOM.render(
         </Router>
       </PizzaStoreServiceProvider>
     </ErrorBoundary>
-	// </Provider>,
-	,
+  </Provider>,
   document.getElementById('root')
 );
