@@ -7,3 +7,7 @@ export { default as Categories } from './Categories';
 export { default as BaseList } from './BaseList';
 export { default as SizeList } from './SizeList';
 export { default as PizzaButton } from './PizzaButton';
+export { default as ErrorBoundary } from './ErrorBoundary';
+export { default as ErrorIndicator } from './ErrorIndicator';
+export { default as App } from './App';
+

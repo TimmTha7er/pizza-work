@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Cart } from './pages';
-import { Header, EmptyCart, NotFound } from './components';
-import PizzaService from './services/pizza-service';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './scss/index.scss';
-
-// для body
-// доделать фильтр
+import { Home, Cart } from '../pages';
+import { Header, EmptyCart, NotFound } from './';
+import PizzaService from '../services/PizzaStoreService';
+import { Route, Switch } from 'react-router-dom';
+import '../scss/index.scss';
 
 // добавить Redux
 
@@ -82,12 +79,23 @@ const App = () => {
   };
 
   const handleAddPizza = (pizza) => {
+    // находим выбранную пиццу
+    const selectPizza = homePizzasList.find((el) => el.id === pizza.pizzaId);
+
+    // извлекаем из нее нужные данные
+    const {
+      pizzaId,
+      // ??? возможно это нужно переделать
+      // если пользователь не выбрал основы и размера
+      base = selectPizza.bases.find((el) => el.available === true).name,
+      size = selectPizza.sizes.find((el) => el.available === true).name,
+    } = pizza;
+
     setCartPizzasList((prevPizzasList) => {
+      // если такая пицца уже есть, то просто увеличиваем кол-во
       const isInArray = prevPizzasList.some((item) => {
         return (
-          item.pizzaId === pizza.pizzaId &&
-          item.base === pizza.base &&
-          item.size === pizza.size
+          item.pizzaId === pizzaId && item.base === base && item.size === size
         );
       });
 
@@ -111,12 +119,14 @@ const App = () => {
         return newPizzasList;
       } else {
         // add new pizza
-        const { price, name, imageUrl } = homePizzasList[pizza.pizzaId];
+        const { price, name, imageUrl } = selectPizza;
 
         return [
           ...prevPizzasList,
           {
-            ...pizza,
+            pizzaId: pizzaId,
+            base: base,
+            size: size,
             cartId: prevPizzasList.length,
             name: name,
             price: price,
@@ -176,50 +186,48 @@ const App = () => {
       return el.category === index;
     });
 
-    console.log('body', newList)
+    // console.log('body', newList)
 
     setHomePizzasList(newList);
   };
 
   return (
-    <Router>
-      <div className='container'>
-        <Header totalCount={totalCount} totalPrice={totalPrice} />
-        <main>
-          <Switch>
-            <Route
-              path='/'
-              render={() => (
-                <Home
-                  cartPizzasList={cartPizzasList}
-                  homePizzasList={homePizzasList}
-                  handlePlusPizza={handleAddPizza}
-                  handleSortPizza={handleSortPizza}
-                  handleFilterPizza={handleFilterPizza}
-                />
-              )}
-              exact
-            />
-            <Route
-              path='/cart'
-              render={() => (
-                <Cart
-                  cartPizzasList={cartPizzasList}
-                  totalCount={totalCount}
-                  totalPrice={totalPrice}
-                  handleClearCart={handleClearCart}
-                  handleDeletePizza={handleDeletePizza}
-                  handlePlusPizza={handlePlusPizza}
-                  handleMinusPizza={handleMinusPizza}
-                />
-              )}
-            />
-            <Route path='/empty-cart' component={EmptyCart} />
-            <Route component={NotFound} />
-          </Switch>
-        </main>
-      </div>
-    </Router>
+    <div className='container'>
+      <Header totalCount={totalCount} totalPrice={totalPrice} />
+      <main>
+        <Switch>
+          <Route
+            path='/'
+            render={() => (
+              <Home
+                cartPizzasList={cartPizzasList}
+                homePizzasList={homePizzasList}
+                handlePlusPizza={handleAddPizza}
+                handleSortPizza={handleSortPizza}
+                handleFilterPizza={handleFilterPizza}
+              />
+            )}
+            exact
+          />
+          <Route
+            path='/cart'
+            render={() => (
+              <Cart
+                cartPizzasList={cartPizzasList}
+                totalCount={totalCount}
+                totalPrice={totalPrice}
+                handleClearCart={handleClearCart}
+                handleDeletePizza={handleDeletePizza}
+                handlePlusPizza={handlePlusPizza}
+                handleMinusPizza={handleMinusPizza}
+              />
+            )}
+          />
+          <Route path='/empty-cart' component={EmptyCart} />
+          <Route component={NotFound} />
+        </Switch>
+      </main>
+    </div>
   );
 };
 
