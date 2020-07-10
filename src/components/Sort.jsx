@@ -1,42 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import cln from 'classnames';
 
-const categories = ['популярности', 'цене', 'алфавиту'];
+import { connect } from 'react-redux';
+import { pizzasSort } from '../actions';
 
-  // по популярности
-  // console.log(
-  //   'sort',
-  //   homePizzasList.sort((a, b) => b.rating - a.rating)
-  // );
+// const categories = ['популярности', 'цене', 'алфавиту'];
 
-  // по цене
-  // console.log(
-  //   'sort',
-  //   homePizzasList.sort((a, b) => b.price - a.price)
-  // );
-
-  // по алфавиту
-  // console.log(
-  //   'sort',
-    // homePizzasList.sort((a, b) => {
-    //   const x = a.name.toLowerCase();
-    //   const y = b.name.toLowerCase();
-
-    //   if (x < y) {
-    //     return -1;
-    //   }
-    //   if (x > y) {
-    //     return 1;
-    //   }
-    //   return 0;
-    // })
-  // );
-
-const Sort = ({handleSortPizza}) => {
+const Sort = ({ items, onSortPizza }) => {
   const [activeItem, setActiveItem] = useState(0);
   const [visiblePopup, setVisiblePopup] = useState(false);
   const sortRef = useRef();
-  const activeLabel = categories[activeItem];
+  const activeLabel = items[activeItem];
 
   useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick);
@@ -50,7 +24,7 @@ const Sort = ({handleSortPizza}) => {
     setActiveItem(index);
     setVisiblePopup(false);
 
-    handleSortPizza(categories[index]);
+    onSortPizza(items[index]);
   };
 
   const handleOutsideClick = (e) => {
@@ -75,7 +49,7 @@ const Sort = ({handleSortPizza}) => {
       {visiblePopup && (
         <div className='sort-popup sort__sort-popup'>
           <ul className='sort-popup__list'>
-            {categories.map((name, index) => {
+            {items.map((name, index) => {
               return (
                 <li
                   key={index}
@@ -95,4 +69,14 @@ const Sort = ({handleSortPizza}) => {
   );
 };
 
-export default Sort;
+const mapStateToProps = ({ sortCategories }) => {
+  return {
+    items: sortCategories,
+  };
+};
+
+const mapDispatchToProps = {
+  onSortPizza: pizzasSort,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

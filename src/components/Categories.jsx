@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import cln from 'classnames';
 
-const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые'];
+import { connect } from 'react-redux';
+import { pizzasFilter } from '../actions';
 
-const Categories = ({ handleFilterPizza }) => {
+// const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые'];
+
+const Categories = ({ items, onFilterClick }) => {
   const [activeItem, setActiveItem] = useState(0);
 
   const onItemClick = (index) => () => {
     if (activeItem !== index) {
       setActiveItem(index);
-
-      handleFilterPizza(index);
+      onFilterClick(index);
     }
   };
 
-  const categoriesList = categories.map((name, index) => {
+  const categoriesList = items.map((name, index) => {
     return (
       <li
         onClick={onItemClick(index)}
@@ -35,4 +37,14 @@ const Categories = ({ handleFilterPizza }) => {
   );
 };
 
-export default Categories;
+const mapStateToProps = ({ filterCategories }) => {
+  return {
+    items: filterCategories,
+  };
+};
+
+const mapDistatchToProps = {
+  onFilterClick: pizzasFilter,
+};
+
+export default connect(mapStateToProps, mapDistatchToProps)(Categories);

@@ -2,6 +2,8 @@ import React from 'react';
 import headerLogo from '../img/header/header-logo.png';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 const Header = ({ totalCount, totalPrice }) => {
   return (
     <header className='header'>
@@ -20,4 +22,13 @@ const Header = ({ totalCount, totalPrice }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = ({ orderTotal }) => {
+  const { price, count } = orderTotal;
+
+  return {
+    totalPrice: price,
+    totalCount: count,
+  };
+};
+
+export default connect(mapStateToProps)(Header);

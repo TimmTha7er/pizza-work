@@ -1,28 +1,16 @@
 import React from 'react';
 import { Categories, Sort, PizzasList } from '../components';
 
-const Home = ({
-  cartPizzasList,
-  homePizzasList,
-  handlePlusPizza,
-  handleSortPizza,
-  handleFilterPizza
-}) => {
-  console.log('cart', cartPizzasList);
-
+const Home = () => {
   return (
     <section className='content'>
       <div className='content__top-line'>
-        <Categories handleFilterPizza={handleFilterPizza} />
-        <Sort handleSortPizza={handleSortPizza} />
+        <Categories />
+        <Sort />
       </div>
       <div className='content__body'>
         <h2 className='content__title'>Все пиццы</h2>
-        <PizzasList
-          cartPizzasList={cartPizzasList}
-          homePizzasList={homePizzasList}
-          handlePlusPizza={handlePlusPizza}
-        />
+        <PizzasList />
       </div>
     </section>
   );

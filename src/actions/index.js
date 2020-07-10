@@ -5,30 +5,61 @@ const pizzasLoaded = (newPizzas) => {
   };
 };
 
-// const pizzaAddedToCart = (bookId) => {
-//   return {
-//     type: 'BOOK_ADDED_TO_CART',
-//     payload: bookId,
-//   };
-// };
+const pizzasRequested = () => {
+  return {
+    type: 'PIZZAS_REQUESTED',
+  };
+};
 
-// const pizzaRemovedFromCart = (bookId) => {
-//   return {
-//     type: 'BOOK_REMOVED_FROM_CART',
-//     payload: bookId,
-//   };
-// };
+const pizzasError = (error) => {
+  return {
+    type: 'PIZZAS_ERROR',
+    payload: error,
+  };
+};
 
-// const allPizzasRemovedFromCart = (bookId) => {
-//   return {
-//     type: 'ALL_BOOKS_REMOVED_FROM_CART',
-//     payload: bookId,
-//   };
-// };
+const pizzasSort = (category) => {
+  return {
+    type: 'PIZZA_SORT',
+    payload: category
+  }
+}
+
+const pizzasFilter = (category) => {
+  return {
+    type: 'PIZZA_FILTER',
+    payload: category
+  }
+}
+
+const pizzaAddedToCart = (pizzaId) => {
+  // console.log(pizzaId)
+  return {
+    type: 'PIZZA_ADDED_TO_CART',
+    payload: pizzaId,
+  };
+};
+
+const pizzaRemovedFromCart = (pizzaId) => {
+  return {
+    type: 'PIZZA_REMOVED_FROM_CART',
+    payload: pizzaId,
+  };
+};
+
+const allPizzasRemovedFromCart = () => {
+  return {
+    type: 'ALL_PIZZAS_REMOVED_FROM_CART',
+  };
+};
 
 export {
   pizzasLoaded,
-  // pizzaAddedToCart,
-  // pizzaRemovedFromCart,
-  // allPizzasRemovedFromCart,
+  pizzasRequested,
+  pizzasError,
+  pizzasSort,
+  pizzasFilter,
+  pizzaAddedToCart,
+  pizzaRemovedFromCart,
+  allPizzasRemovedFromCart
 };

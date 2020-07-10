@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import cln from 'classnames';
 
-const findActiveElement = (elements) => {
-  return elements.findIndex((el) => {
-    return el.available === true;
-  });
-};
+import { connect } from 'react-redux';
 
-const BaseList = ({ bases, handleBaseClick }) => {
-  const [activeBase, setActiveBase] = useState(findActiveElement(bases));
+// const bases = ['тонкое', 'традиционное'];
+
+const BaseList = ({ bases }) => {
+  const [activeBase, setActiveBase] = useState(0);
 
   const onBaseClick = (index, base) => () => {
     if (base.available) {
       setActiveBase(index);
-      handleBaseClick(index);
+      // handleBaseClick(index);
     }
   };
 
@@ -32,11 +30,17 @@ const BaseList = ({ bases, handleBaseClick }) => {
     );
   });
 
-  return (
-   <div className='pizza__base-list'>
-     {baseList}
-   </div>
-  );
+  return <div className='pizza__base-list'>{baseList}</div>;
 };
 
-export default BaseList;
+// const mapStateToProps = () => {};
+
+const mapDispatchToProps = () => {
+  return {
+    onBaseClick: (index, base) => () => {
+      console.log('on base click', index, base);
+    },
+  };
+};
+
+export default connect(mapDispatchToProps)(BaseList);

@@ -1,26 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const CartItem = ({
-  cartId,
-  imageUrl,
-  name,
-  base,
-  size,
-  price,
-  count,
-  handleDeletePizza,
-  handlePlusPizza,
-  handleMinusPizza,
-}) => {
-  const onAddBtnClick = () => {
-    handlePlusPizza(cartId);
-  };
-
-  const onMinusBtnClick = () => {
-    if (count > 1) {
-      handleMinusPizza(cartId);
-    }
-  };
+const CartItem = ({ pizza, onIncrease, onDecrease, onDelete }) => {
+  const { cartId, imageUrl, name, base, size, price, count } = pizza;
 
   return (
     <div className='shopping-list__item'>
@@ -36,12 +18,12 @@ const CartItem = ({
       </div>
       <div className='shopping-list__btns-block'>
         <div
-          onClick={onMinusBtnClick}
+          onClick={onDecrease(cartId)}
           className='shopping-list__btn-minus icon-minus'
         ></div>
         <div className='shopping-list__item-count'>{count}</div>
         <div
-          onClick={onAddBtnClick}
+          onClick={onIncrease(cartId)}
           className='shopping-list__btn-add icon-plus'
         ></div>
       </div>
@@ -49,11 +31,31 @@ const CartItem = ({
         {price * count}
       </div>
       <div
-        onClick={() => handleDeletePizza(cartId)}
+        onClick={onDelete(cartId)}
         className='shopping-list__item-delete icon-cancel'
       ></div>
     </div>
   );
 };
 
-export default CartItem;
+// const mapStateToProps = ({pizzas}) => {
+//   return {
+
+//   }
+// }
+
+const mapDispatchToProps = () => {
+  return {
+    onIncrease: (cartId) => () => {
+      console.log('+', cartId);
+    },
+    onDecrease: (cartId) => () => {
+      console.log('-', cartId);
+    },
+    onDelete: (cartId) => () => {
+      console.log('del', cartId);
+    },
+  };
+};
+
+export default connect(mapDispatchToProps)(CartItem);

@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import cln from 'classnames';
 
+import { connect } from "react-redux";
+
 const findActiveElement = (elements) => {
   return elements.findIndex((el) => {
     return el.available === true;
   });
 };
 
-const SizeList = ({ sizes, handleSizeClick }) => {
+const SizeList = ({ sizes,  }) => {
   const [activeSize, setActiveSize] = useState(findActiveElement(sizes));
 
   const onSizeClick = (index, size) => () => {
     if (size.available) {
       setActiveSize(index);
-      handleSizeClick(index);
+      // handleSizeClick(index);
     }
   };
 
@@ -39,4 +41,15 @@ const SizeList = ({ sizes, handleSizeClick }) => {
    );
 };
 
-export default SizeList;
+// const mapStateToProps = () => {};
+
+const mapDispatchToProps = () => {
+  return {
+    onSizeClick: (index, size) => () => {
+      console.log('on size click', index, size);
+    },
+  };
+};
+
+export default connect(mapDispatchToProps)(SizeList);
+

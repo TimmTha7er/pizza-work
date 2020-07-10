@@ -2,31 +2,21 @@ import React from 'react';
 import ShoppingList from '../components/ShoppingList';
 import { Link } from 'react-router-dom';
 
-const Cart = ({
-  cartPizzasList ,
-  totalCount,
-  totalPrice,
-  handleClearCart,
-  handleDeletePizza,
-  handlePlusPizza,
-  handleMinusPizza,
-}) => {
+import { connect } from 'react-redux';
+import { allPizzasRemovedFromCart } from '../actions';
+
+const Cart = ({ totalCount, totalPrice, onClear }) => {
   return (
     <section className='cart'>
       <div className='container cart__container'>
         <div className='cart__top-line'>
           <h2 className='cart__title icon-basket'>Корзина</h2>
-          <div onClick={handleClearCart} className='cart__clear icon-trash-empty'>
+          <div onClick={onClear} className='cart__clear icon-trash-empty'>
             Очистить корзину
           </div>
         </div>
 
-        <ShoppingList
-          cartPizzasList={cartPizzasList}
-          handleDeletePizza={handleDeletePizza}
-          handlePlusPizza={handlePlusPizza}
-          handleMinusPizza={handleMinusPizza}
-        />
+        <ShoppingList />
 
         <div className='cart__details'>
           <div className='cart__total'>
@@ -52,4 +42,17 @@ const Cart = ({
   );
 };
 
-export default Cart;
+const mapStateToProps = ({ orderTotal }) => {
+  const { price, count } = orderTotal;
+
+  return {
+    totalPrice: price,
+    totalCount: count,
+  };
+};
+
+const mapDispatchToProps = {
+  onClear: allPizzasRemovedFromCart,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
