@@ -1,9 +1,9 @@
 import React from 'react';
-import CartItem from '../components/CartItem';
+import CartItem from './CartItem';
 
 import { connect } from 'react-redux';
 
-const ShoppingList = ({ items }) => {
+const CartItemList = ({ items }) => {
   console.log('items', items);
   return (
     <div className='shopping-list cart__shopping-list'>
@@ -14,10 +14,11 @@ const ShoppingList = ({ items }) => {
   );
 };
 
-const mapStateToProps = ({ cartItems }) => {
+const mapStateToProps = ({ cart: { cartItems } }) => {
+  console.log('cartItems', cartItems )
   return {
     items: cartItems,
   };
 };
 
-export default connect(mapStateToProps)(ShoppingList);
+export default connect(mapStateToProps)(CartItemList);

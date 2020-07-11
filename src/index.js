@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { App, ErrorBoundary } from './components';
 import PizzaStoreService from './services/PizzaStoreService';
-import { PizzaStoreServiceProvider } from './components/PizzaStoreServiceContext';
+import { App, PizzaStoreServiceProvider, ErrorBoundary} from './components';
 
-import store from './store';
+import store from './redux/store';
 const pizzaStoreService = new PizzaStoreService();
 
 ReactDOM.render(

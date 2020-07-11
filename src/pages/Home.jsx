@@ -1,11 +1,11 @@
 import React from 'react';
-import { Categories, Sort, PizzasList } from '../components';
+import {Sort, PizzasList, Filters} from '../components';
 
 const Home = () => {
   return (
     <section className='content'>
       <div className='content__top-line'>
-        <Categories />
+        <Filters />
         <Sort />
       </div>
       <div className='content__body'>

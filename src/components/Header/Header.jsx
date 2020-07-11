@@ -1,8 +1,8 @@
 import React from 'react';
-import headerLogo from '../img/header/header-logo.png';
 import { Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
+
+import headerLogo from '../../img/header/header-logo.png';
 
 const Header = ({ totalCount, totalPrice }) => {
   return (
@@ -22,9 +22,11 @@ const Header = ({ totalCount, totalPrice }) => {
   );
 };
 
-const mapStateToProps = ({ orderTotal }) => {
-  const { price, count } = orderTotal;
-
+const mapStateToProps = ({
+  cart: {
+    orderTotal: { price, count },
+  },
+}) => {
   return {
     totalPrice: price,
     totalCount: count,

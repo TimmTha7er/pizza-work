@@ -1,12 +1,19 @@
 import React from 'react';
 import { Home, Cart } from '../pages';
-import { Header, EmptyCart, NotFound } from './';
+import { Header, NotFound, CartEmpty } from './';
 
 import { Route, Switch } from 'react-router-dom';
 import '../scss/index.scss';
 
-// переделать все приложения на Redux
-// поправить scss - добавить cursor: pointer для всех кнопок
+// TODO
+// Redux
+// 1 combineReducers - можно ли получить доступ из одного редюсера к другому??
+// 2 доделать что бы вся логика просто работала
+// 3 подумать как лучше сделать фильтр и сортировку
+// 4 подумать где и как лучше хранить категории для фильтра и сортировки
+
+// APP
+// 2 Подумать как лучше разместить img, fonts, scss 
 
 const App = () => {
 
@@ -122,7 +129,7 @@ const App = () => {
         <Switch>
           <Route path='/' render={() => <Home />} exact />
           <Route path='/cart' render={() => <Cart />} />
-          <Route path='/empty-cart' component={EmptyCart} />
+          <Route path='/empty-cart' component={CartEmpty} />
           <Route component={NotFound} />
         </Switch>
       </main>

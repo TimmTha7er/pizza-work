@@ -9,7 +9,7 @@ const findActiveElement = (elements) => {
   });
 };
 
-const SizeList = ({ sizes,  }) => {
+const PizzaSizeList = ({ sizes,  }) => {
   const [activeSize, setActiveSize] = useState(findActiveElement(sizes));
 
   const onSizeClick = (index, size) => () => {
@@ -51,5 +51,5 @@ const mapDispatchToProps = () => {
   };
 };
 
-export default connect(mapDispatchToProps)(SizeList);
+export default connect(mapDispatchToProps)(PizzaSizeList);
 

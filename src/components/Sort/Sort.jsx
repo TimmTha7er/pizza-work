@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import cln from 'classnames';
 
 import { connect } from 'react-redux';
-import { pizzasSort } from '../actions';
+import { pizzasSort } from '../../redux/actions';
 
 // const categories = ['популярности', 'цене', 'алфавиту'];
 
@@ -69,7 +69,7 @@ const Sort = ({ items, onSortPizza }) => {
   );
 };
 
-const mapStateToProps = ({ sortCategories }) => {
+const mapStateToProps = ({ filters: { sortCategories } }) => {
   return {
     items: sortCategories,
   };

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import emptyCartImg from '../img/cart/empty-cart.png';
+import emptyCartImg from '../../img/cart/empty-cart.png';
 import { Link } from "react-router-dom";
 
-const EmptyCart = () => {
+const CartEmpty = () => {
   return (
     <section className='empty-cart'>
       <div className='container empty-cart__container'>
@@ -27,4 +27,4 @@ const EmptyCart = () => {
   );
 };
 
-export default EmptyCart;
+export default CartEmpty;

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 // const bases = ['тонкое', 'традиционное'];
 
-const BaseList = ({ bases }) => {
+const PizzaBaseList = ({ bases }) => {
   const [activeBase, setActiveBase] = useState(0);
 
   const onBaseClick = (index, base) => () => {
@@ -43,4 +43,4 @@ const mapDispatchToProps = () => {
   };
 };
 
-export default connect(mapDispatchToProps)(BaseList);
+export default connect(mapDispatchToProps)(PizzaBaseList);

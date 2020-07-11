@@ -1,9 +1,9 @@
 import React from 'react';
-import ShoppingList from '../components/ShoppingList';
 import { Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
-import { allPizzasRemovedFromCart } from '../actions';
+
+import { CartItemList } from '../components';
+import { allPizzasRemovedFromCart } from '../redux/actions';
 
 const Cart = ({ totalCount, totalPrice, onClear }) => {
   return (
@@ -16,7 +16,7 @@ const Cart = ({ totalCount, totalPrice, onClear }) => {
           </div>
         </div>
 
-        <ShoppingList />
+        <CartItemList />
 
         <div className='cart__details'>
           <div className='cart__total'>

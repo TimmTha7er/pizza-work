@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Pizza, Spinner, ErrorIndicator } from './';
+import { Pizza, Spinner, ErrorIndicator, pizzaStoreContext } from '../../components';
 
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -8,8 +8,7 @@ import {
   pizzasRequested,
   pizzasError,
   pizzaAddedToCart,
-} from '../actions';
-import { pizzaStoreContext } from './PizzaStoreServiceContext';
+} from '../../redux/actions';
 
 const PizzasList = ({
   pizzas,
@@ -18,8 +17,8 @@ const PizzasList = ({
   pizzasError,
   loading,
   error,
-  filter,
-  cartItems,
+  // filter,
+  // cartItems,
   pizzaAddedToCart,
 }) => {
   const pizzaStoreService = useContext(pizzaStoreContext);
@@ -32,11 +31,13 @@ const PizzasList = ({
       .catch((error) => pizzasError(error));
   }, [pizzaStoreService, pizzasError, pizzasLoaded, pizzasRequested]); // ???? разобраться
 
+  console.log(pizzas)
+
   const pizzasList = pizzas.map((pizza) => {
     // const count = cartItems.reduce((prev, cur) => {
     //   return cur.pizzaId === pizza.id ? prev + cur.count : prev;
     // }, 0);
-    if (filter === 0 || pizza.category === filter) {
+    // if (filter === 0 || pizza.category === filter) {
       return (
         <Pizza
           key={pizza.id}
@@ -45,7 +46,7 @@ const PizzasList = ({
           pizzaAddedToCart={pizzaAddedToCart}
         />
       );
-    }
+    // }
   });
 
   if (loading) {
@@ -56,16 +57,19 @@ const PizzasList = ({
     return <ErrorIndicator />;
   }
 
+  // console.log(pizzasList);
+
   return <div className='content__pizza-list'>{pizzasList}</div>;
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({pizzasList: {pizzas, loading, error}}) => {
+  // console.log('state', pizzasList)
   return {
-    pizzas: state.pizzas,
-    loading: state.loading,
-    error: state.error,
-    cartItems: state.cartItems,
-    filter: state.filter,
+    pizzas: pizzas,
+    loading: loading,
+    error: error,
+    // cartItems: state.cartItems,
+    // filter: pizzasList.filter,
   };
 };
 

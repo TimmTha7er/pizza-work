@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseList, SizeList, PizzaButton } from './';
+import { PizzaBaseList, PizzaSizeList, PizzaButton } from '../../components';
 
 // import { bindActionCreators } from 'redux';
 // import { connect } from 'react-redux';
@@ -37,8 +37,8 @@ const Pizza = ({ pizza, pizzaAddedToCart }) => {
       </div>
       <div className='pizza__name'>{name}</div>
       <div className='pizza__options'>
-        <BaseList bases={bases} />
-        <SizeList sizes={sizes} />
+        <PizzaBaseList bases={bases} />
+        <PizzaSizeList sizes={sizes} />
       </div>
       <div className='pizza__bot-line'>
         <div className='pizza__price icon-rouble'>{price}</div>
