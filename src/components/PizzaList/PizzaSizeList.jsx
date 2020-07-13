@@ -1,32 +1,27 @@
 import React, { useState } from 'react';
 import cln from 'classnames';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { setActiveSize } from '../../redux/actions';
 
-const findActiveElement = (elements) => {
-  return elements.findIndex((el) => {
-    return el.available === true;
-  });
-};
+const PizzaSizeList = ({ sizes, initSize = {}, onSizeClick, pizzaId }) => {
+  const activeSize = initSize.activeSize;
 
-const PizzaSizeList = ({ sizes,  }) => {
-  const [activeSize, setActiveSize] = useState(findActiveElement(sizes));
-
-  const onSizeClick = (index, size) => () => {
+  const onSize = (size, pizzaId, index) => () => {
     if (size.available) {
-      setActiveSize(index);
-      // handleSizeClick(index);
+      onSizeClick(pizzaId, index);
     }
   };
 
-	const sizeList = sizes.map((size, index) => {
+  const sizeList = sizes.map((size, index) => {
     return (
       <span
         key={index}
-        onClick={onSizeClick(index, size)}
+        onClick={onSize(size, pizzaId, index)}
         className={cln('pizza__size', {
           'pizza__size_disable': !size.available,
-          'pizza__size_active': activeSize === index && size.available,
+          'pizza__size_active': activeSize === index,
+          // 'pizza__size_active': activeSize === index && size.available,
         })}
       >
         {size.name}
@@ -34,22 +29,13 @@ const PizzaSizeList = ({ sizes,  }) => {
     );
   });
 
-  return (
-   <div className='pizza__size-list'>   
-      {sizeList}
-   </div>
-   );
+  return <div className='pizza__size-list'>{sizeList}</div>;
 };
 
 // const mapStateToProps = () => {};
 
-const mapDispatchToProps = () => {
-  return {
-    onSizeClick: (index, size) => () => {
-      console.log('on size click', index, size);
-    },
-  };
+const mapDispatchToProps = {
+  onSizeClick: setActiveSize,
 };
 
-export default connect(mapDispatchToProps)(PizzaSizeList);
-
+export default connect(null, mapDispatchToProps)(PizzaSizeList);

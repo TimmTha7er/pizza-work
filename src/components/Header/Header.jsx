@@ -27,6 +27,7 @@ const mapStateToProps = ({
     orderTotal: { price, count },
   },
 }) => {
+  
   return {
     totalPrice: price,
     totalCount: count,

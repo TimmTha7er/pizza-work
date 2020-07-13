@@ -38,6 +38,7 @@ const Filters = ({ items, onFilterClick }) => {
 };
 
 const mapStateToProps = ({ filters: { filterCategories } }) => {
+  // console.log('state', state)
   return {
     items: filterCategories,
   };

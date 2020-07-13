@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import cln from 'classnames';
 
 import { connect } from 'react-redux';
+import { setActiveBase } from '../../redux/actions';
 
-// const bases = ['тонкое', 'традиционное'];
+const PizzaBaseList = ({ bases, initBase = {}, onBaseClick, pizzaId }) => {
+  const activeBase = initBase.activeBase;
 
-const PizzaBaseList = ({ bases }) => {
-  const [activeBase, setActiveBase] = useState(0);
-
-  const onBaseClick = (index, base) => () => {
+  const onBase = (base, pizzaId, index) => () => {
     if (base.available) {
-      setActiveBase(index);
-      // handleBaseClick(index);
+      onBaseClick(pizzaId, index);
     }
   };
 
@@ -19,10 +17,11 @@ const PizzaBaseList = ({ bases }) => {
     return (
       <span
         key={index}
-        onClick={onBaseClick(index, base)}
+        onClick={onBase(base, pizzaId, index)}
         className={cln('pizza__base', {
           'pizza__base_disable': !base.available,
-          'pizza__base_active': activeBase === index && base.available,
+          // 'pizza__base_active': activeBase === index && base.available,
+          'pizza__base_active': activeBase === index,
         })}
       >
         {base.name}
@@ -33,14 +32,10 @@ const PizzaBaseList = ({ bases }) => {
   return <div className='pizza__base-list'>{baseList}</div>;
 };
 
-// const mapStateToProps = () => {};
+const mapStateToProps = () => {};
 
-const mapDispatchToProps = () => {
-  return {
-    onBaseClick: (index, base) => () => {
-      console.log('on base click', index, base);
-    },
-  };
+const mapDispatchToProps = {
+  onBaseClick: setActiveBase,
 };
 
-export default connect(mapDispatchToProps)(PizzaBaseList);
+export default connect(null, mapDispatchToProps)(PizzaBaseList);

@@ -1,14 +1,14 @@
 const initialState = {
-  filter: 0,
   filterCategories: ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые'],
   sortCategories: ['популярности', 'цене', 'алфавиту'],
+  filter: 0,
 };
 
-const filtersReducer = (state = initialState, action) => {
+const filtersReducer = (state = initialState, action, fullState) => {
   switch (action.type) {
     case 'PIZZA_SORT':
       const category = action.payload;
-      const sortedPizzas = [...state.pizzas];
+      const sortedPizzas = [...fullState.pizzasList.pizzas];
 
       switch (category) {
         case 'популярности':

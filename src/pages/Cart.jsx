@@ -42,9 +42,11 @@ const Cart = ({ totalCount, totalPrice, onClear }) => {
   );
 };
 
-const mapStateToProps = ({ orderTotal }) => {
-  const { price, count } = orderTotal;
-
+const mapStateToProps = ({
+  cart: {
+    orderTotal: { price, count },
+  },
+}) => {
   return {
     totalPrice: price,
     totalCount: count,
