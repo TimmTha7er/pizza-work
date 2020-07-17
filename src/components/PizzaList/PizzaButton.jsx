@@ -15,5 +15,4 @@ const PizzaButton = ({ onBtnClick, count }) => {
   );
 };
 
-// export default React.memo(PizzaButton);
-export default PizzaButton;
+export default React.memo(PizzaButton);

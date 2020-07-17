@@ -47,4 +47,4 @@ const CartItem = ({ cartPizza, onIncrease, onDecrease, onDelete }) => {
   );
 };
 
-export default CartItem;
+export default React.memo(CartItem);

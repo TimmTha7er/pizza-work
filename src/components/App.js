@@ -8,16 +8,7 @@ import { connect } from 'react-redux';
 import { fetchData } from '../redux/actions';
 
 // TODO
-// Redux
-//
-
-// 3 перевести redux на hooks
-
-// 3 подумать как лучше сделать фильтр и сортировку
-// 4 подумать где и как лучше хранить категории для фильтра и сортировки
-
-// APP
-// 2 Подумать как лучше разместить img, fonts, scss
+// add redux hooks
 
 const App = ({ loading, error, fetchData }) => {
   const pizzaStoreService = useContext(pizzaStoreContext);

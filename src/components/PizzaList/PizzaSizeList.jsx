@@ -28,5 +28,4 @@ const PizzaSizeList = ({ sizes, initSize = {}, onSizeClick, pizzaId }) => {
   return <div className='pizza__size-list'>{sizeList}</div>;
 };
 
-// export default React.memo(PizzaSizeList);
-export default PizzaSizeList;
+export default React.memo(PizzaSizeList);

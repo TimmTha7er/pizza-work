@@ -47,5 +47,4 @@ const Pizza = ({
   );
 };
 
-// export default React.memo(Pizza);
-export default Pizza;
+export default React.memo(Pizza);

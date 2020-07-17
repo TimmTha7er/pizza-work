@@ -28,6 +28,4 @@ const PizzaBaseList = ({ bases, initBase = {}, onBaseClick, pizzaId }) => {
   return <div className='pizza__base-list'>{baseList}</div>;
 };
 
-
-// export default React.memo(PizzaBaseList);
-export default PizzaBaseList;
+export default React.memo(PizzaBaseList);
