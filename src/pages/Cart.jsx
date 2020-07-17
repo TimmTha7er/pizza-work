@@ -1,13 +1,31 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { CartItemList } from '../components';
 import { allPizzasRemovedFromCart } from '../redux/actions';
+import { useActions } from '../components/Hooks/useActions';
 
-const Cart = ({ totalCount, totalPrice, onClear }) => {
+const Cart = () => {
+  const { totalCount, totalPrice } = useSelector(
+    ({
+      cart: {
+        orderTotal: { price, count },
+      },
+    }) => {
+      return {
+        totalPrice: price,
+        totalCount: count,
+      };
+    }
+  );
+
+  const { onClear } = useActions({
+    onClear: allPizzasRemovedFromCart,
+  });
+
   if (totalCount < 1) {
-    return <Redirect to="/empty-cart"/>;
+    return <Redirect to='/empty-cart' />;
   }
 
   return (
@@ -46,19 +64,4 @@ const Cart = ({ totalCount, totalPrice, onClear }) => {
   );
 };
 
-const mapStateToProps = ({
-  cart: {
-    orderTotal: { price, count },
-  },
-}) => {
-  return {
-    totalPrice: price,
-    totalCount: count,
-  };
-};
-
-const mapDispatchToProps = {
-  onClear: allPizzasRemovedFromCart,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default Cart;

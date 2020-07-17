@@ -1,14 +1,27 @@
 import React from 'react';
 import CartItem from './CartItem';
 
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useActions } from '../Hooks/useActions';
 import {
   pizzaRemovedFromCart,
   pizzaIncrease,
   pizzaDecrease,
 } from '../../redux/actions';
 
-const CartItemList = ({ items, onIncrease, onDecrease, onDelete }) => {
+const CartItemList = () => {
+  const { items } = useSelector(({ cart: { cartItems } }) => {
+    return {
+      items: cartItems,
+    };
+  });
+
+  const { onIncrease, onDecrease, onDelete } = useActions({
+    onDecrease: pizzaDecrease,
+    onIncrease: pizzaIncrease,
+    onDelete: pizzaRemovedFromCart,
+  });
+
   return (
     <div className='shopping-list cart__shopping-list'>
       {items.map((pizza, index) => {
@@ -24,16 +37,4 @@ const CartItemList = ({ items, onIncrease, onDecrease, onDelete }) => {
   );
 };
 
-const mapDispatchToProps = {
-  onDecrease: pizzaDecrease,
-  onIncrease: pizzaIncrease,
-  onDelete: pizzaRemovedFromCart,
-};
-
-const mapStateToProps = ({ cart: { cartItems } }) => {
-  return {
-    items: cartItems,
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartItemList);
+export default CartItemList;

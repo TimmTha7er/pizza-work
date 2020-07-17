@@ -1,10 +1,22 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import emptyCartImg from '../../img/cart/empty-cart.png';
 
-const CartEmpty = ({ totalCount }) => {
+const CartEmpty = () => {
+  const { totalCount } = useSelector(
+    ({
+      cart: {
+        orderTotal: { count },
+      },
+    }) => {
+      return {
+        totalCount: count,
+      };
+    }
+  );
+
   if (totalCount > 0) {
     return <Redirect to='/cart' />;
   }
@@ -34,14 +46,4 @@ const CartEmpty = ({ totalCount }) => {
   );
 };
 
-const mapStateToProps = ({
-  cart: {
-    orderTotal: { count },
-  },
-}) => {
-  return {
-    totalCount: count,
-  };
-};
-
-export default connect(mapStateToProps, null)(CartEmpty);
+export default CartEmpty;

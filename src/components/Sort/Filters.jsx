@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
 import cln from 'classnames';
 
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { pizzasFilter } from '../../redux/actions';
+import { useActions } from '../Hooks/useActions';
 
-const Filters = ({ items, filter, onFilterClick, pizzas }) => {
+const Filters = () => {
+  const { items, filter, pizzas } = useSelector(
+    ({ filters: { filter }, data: { filterCategories, pizzas } }) => {
+      return {
+        items: filterCategories,
+        filter,
+        pizzas,
+      };
+    }
+  );
+
+  const { onFilterClick } = useActions({
+    onFilterClick: pizzasFilter,
+  });
+
   const [activeItem, setActiveItem] = useState(filter);
 
   const onItemClick = (index) => () => {
@@ -20,7 +35,7 @@ const Filters = ({ items, filter, onFilterClick, pizzas }) => {
         key={id}
         onClick={onItemClick(index)}
         className={cln('categories__item', {
-          'categories__item_active': index === activeItem,
+          categories__item_active: index === activeItem,
         })}
       >
         {name}
@@ -35,20 +50,4 @@ const Filters = ({ items, filter, onFilterClick, pizzas }) => {
   );
 };
 
-// export default React.memo(Filters);
-const mapStateToProps = ({
-  filters: { filter },
-  data: { filterCategories, pizzas },
-}) => {
-  return {
-    items: filterCategories,
-    filter,
-    pizzas,
-  };
-};
-
-const mapDistatchToProps = {
-  onFilterClick: pizzasFilter,
-};
-
-export default connect(mapStateToProps, mapDistatchToProps)(Filters);
+export default Filters;

@@ -1,8 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Sort, PizzasList, Filters } from '../components';
 
-const Home = ({ title }) => {
+const Home = () => {
+  const { title } = useSelector(
+    ({ filters: { filter }, data: { filterCategories } }) => {
+      const title = filterCategories[filter].name;
+
+      return {
+        title,
+      };
+    }
+  );
+
   return (
     <section className='content'>
       <div className='content__top-line'>
@@ -17,15 +27,4 @@ const Home = ({ title }) => {
   );
 };
 
-const mapStateToProps = ({
-  filters: { filter },
-  data: { filterCategories },
-}) => {
-  const title = filterCategories[filter].name;
-
-  return {
-    title,
-  };
-};
-
-export default connect(mapStateToProps, null)(Home);
+export default Home;
