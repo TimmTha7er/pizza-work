@@ -1,4 +1,6 @@
 export { default as Header } from './Header/Header';
+export { default as Logo } from './Header/Logo';
+export { default as CartButton } from './Header/CartButton';
 
 export { default as CartItem } from './Cart/CartItem';
 export { default as CartEmpty } from './Cart/CartEmpty';

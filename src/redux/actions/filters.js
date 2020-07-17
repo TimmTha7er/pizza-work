@@ -1,15 +1,20 @@
 export const pizzasSort = (category) => {
   return {
     type: 'PIZZA_SORT',
-    payload: category,
+    payload: { category },
   };
 };
 
-export const pizzasFilter = (category) => {
+export const pizzasFilter = (filter, pizzas ) => {
   return {
     type: 'PIZZA_FILTER',
-    payload: category,
+    payload: { filter, pizzas },
   };
 };
 
-
+export const initPizzas = (pizzas) => {
+  return {
+    type: 'INIT_PIZZAS',
+    payload: pizzas,
+  };
+};

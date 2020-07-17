@@ -4,25 +4,23 @@ import cln from 'classnames';
 import { connect } from 'react-redux';
 import { pizzasFilter } from '../../redux/actions';
 
-// const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые'];
-
-const Filters = ({ items, onFilterClick }) => {
-  const [activeItem, setActiveItem] = useState(0);
+const Filters = ({ items, filter, onFilterClick, pizzas }) => {
+  const [activeItem, setActiveItem] = useState(filter);
 
   const onItemClick = (index) => () => {
     if (activeItem !== index) {
       setActiveItem(index);
-      onFilterClick(index);
+      onFilterClick(index, pizzas);
     }
   };
 
-  const categoriesList = items.map((name, index) => {
+  const categoriesList = items.map(({ id, name }, index) => {
     return (
       <li
+        key={id}
         onClick={onItemClick(index)}
-        key={`${index}_${name}`}
         className={cln('categories__item', {
-          categories__item_active: index === activeItem,
+          'categories__item_active': index === activeItem,
         })}
       >
         {name}
@@ -37,10 +35,15 @@ const Filters = ({ items, onFilterClick }) => {
   );
 };
 
-const mapStateToProps = ({ filters: { filterCategories } }) => {
-  // console.log('state', state)
+// export default React.memo(Filters);
+const mapStateToProps = ({
+  filters: { filter },
+  data: { filterCategories, pizzas },
+}) => {
   return {
     items: filterCategories,
+    filter,
+    pizzas,
   };
 };
 

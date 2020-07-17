@@ -1,7 +1,7 @@
-export const pizzaAddedToCart = (pizzaId, activeBase, activeSize) => {
+export const pizzaAddedToCart = (pizza, activeBase, activeSize) => {
   return {
     type: 'PIZZA_ADDED_TO_CART',
-    payload: { pizzaId, activeBase, activeSize },
+    payload: { pizza, activeBase, activeSize },
   };
 };
 
@@ -18,7 +18,7 @@ export const allPizzasRemovedFromCart = () => {
   };
 };
 
-export const pizzaIncrease = (cartId) => {
+export const pizzaIncrease = (cartId) =>  {
   return {
     type: 'PIZZA_INCREASE',
     payload: cartId,

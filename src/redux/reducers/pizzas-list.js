@@ -22,65 +22,60 @@ const initialState = {
   activeSizes: [],
 };
 
-const pizzasListReducer = (state = initialState, action, fullState) => {
-  switch (action.type) {
-    case 'INITIAL_ACTIVE_BASES':
-      const activeBases = action.payload.pizzas.map((pizza) => {
-        return {
-          pizzaId: pizza.id,
-          activeBase: findActiveElement(pizza.bases),
-        };
-      });
+const pizzasListReducer = (state = initialState, action) => {
+  if (action.type === 'INITIAL_ACTIVE_BASES') {
+    const { pizzas } = action.payload;
 
+    const activeBases = pizzas.map((pizza) => {
       return {
-        ...state,
-        activeBases: activeBases,
+        pizzaId: pizza.id,
+        activeBase: findActiveElement(pizza.bases),
       };
+    });
 
-    case 'INITIAL_ACTIVE_SIZES':
-      const activeSizes = action.payload.pizzas.map((pizza) => {
-        return {
-          pizzaId: pizza.id,
-          activeSize: findActiveElement(pizza.sizes),
-        };
-      });
-
-      return {
-        ...state,
-        activeSizes: activeSizes,
-      };
-
-    case 'SET_ACTIVE_SIZE':
-      const { pizzaId, index } = action.payload;
-      const newSizes = setActive(
-        state.activeSizes,
-        pizzaId,
-        index,
-        'activeSize'
-      );
-
-      return {
-        ...state,
-        activeSizes: newSizes,
-      };
-
-    case 'SET_ACTIVE_BASE':
-      // const { pizzaId, index } = action.payload;
-      const newBases = setActive(
-        state.activeBases,
-        action.payload.pizzaId,
-        action.payload.index,
-        'activeBase'
-      );
-    
-      return {
-        ...state,
-        activeBases: newBases,
-      };
-
-    default:
-      return state;
+    return {
+      ...state,
+      activeBases: activeBases,
+    };
   }
+
+  if (action.type === 'INITIAL_ACTIVE_SIZES') {
+    const { pizzas } = action.payload;
+    
+    const activeSizes = pizzas.map((pizza) => {
+      return {
+        pizzaId: pizza.id,
+        activeSize: findActiveElement(pizza.sizes),
+      };
+    });
+
+    return {
+      ...state,
+      activeSizes: activeSizes,
+    };
+  }
+
+  if (action.type === 'SET_ACTIVE_SIZE') {
+    const { pizzaId, index } = action.payload;
+    const newSizes = setActive(state.activeSizes, pizzaId, index, 'activeSize');
+
+    return {
+      ...state,
+      activeSizes: newSizes,
+    };
+  }
+
+  if (action.type === 'SET_ACTIVE_BASE') {
+    const { pizzaId, index } = action.payload;
+    const newBases = setActive(state.activeBases, pizzaId, index, 'activeBase');
+
+    return {
+      ...state,
+      activeBases: newBases,
+    };
+  }
+
+  return state;
 };
 
 export default pizzasListReducer;

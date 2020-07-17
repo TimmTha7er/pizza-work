@@ -1,14 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import {
-  pizzaRemovedFromCart,
-  pizzaIncrease,
-  pizzaDecrease,
-} from '../../redux/actions';
+const CartItem = ({ cartPizza, onIncrease, onDecrease, onDelete }) => {
+  const { cartId, imageUrl, name, base, size, price, count } = cartPizza;
 
-const CartItem = ({ pizza, onIncrease, onDecrease, onDelete }) => {
-  const { cartId, imageUrl, name, base, size, price, count } = pizza;
+  const handleDecrease = () => {
+    onDecrease(cartId);
+  };
+  const handleIncrease = () => {
+    onIncrease(cartId);
+  };
+  const handleDelete = () => {
+    onDelete(cartId);
+  };
 
   return (
     <div className='shopping-list__item'>
@@ -24,12 +27,12 @@ const CartItem = ({ pizza, onIncrease, onDecrease, onDelete }) => {
       </div>
       <div className='shopping-list__btns-block'>
         <div
-          onClick={() => onDecrease(cartId)}
+          onClick={handleDecrease}
           className='shopping-list__btn-minus icon-minus'
         ></div>
         <div className='shopping-list__item-count'>{count}</div>
         <div
-          onClick={() => onIncrease(cartId)}
+          onClick={handleIncrease}
           className='shopping-list__btn-add icon-plus'
         ></div>
       </div>
@@ -37,29 +40,11 @@ const CartItem = ({ pizza, onIncrease, onDecrease, onDelete }) => {
         {price * count}
       </div>
       <div
-        onClick={() => onDelete(cartId)}
+        onClick={handleDelete}
         className='shopping-list__item-delete icon-cancel'
       ></div>
     </div>
   );
 };
 
-// const mapStateToProps = ({pizzas}) => {
-//   return {
-
-//   }
-// }
-
-const mapDispatchToProps = {
-  // onIncrease: (cartId) => () => {
-  //   console.log('+', cartId);
-  // },
-  // onDecrease: (cartId) => () => {
-  //   console.log('-', cartId);
-  // },
-  onDecrease: pizzaDecrease,
-  onIncrease: pizzaIncrease,
-  onDelete: pizzaRemovedFromCart,
-};
-
-export default connect(null, mapDispatchToProps)(CartItem);
+export default CartItem;

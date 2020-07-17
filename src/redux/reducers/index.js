@@ -3,15 +3,13 @@ import filtersReducer from './filters';
 import dataReducer from './data';
 import pizzasListReducer from './pizzas-list';
 
+import { combineReducers } from 'redux';
 
-const rootReducer = (state = {}, action) => {
-  console.log('main state', state)
-  return {
-    cart: cartReducer(state.cart, action, state),
-    filters: filtersReducer(state.filters , action, state),
-    data: dataReducer(state.data, action, state),
-    pizzasList: pizzasListReducer(state.pizzasList, action, state),
-  };
-};
+const rootReducer = combineReducers({
+  cart: cartReducer,
+  filters: filtersReducer,
+  data: dataReducer,
+  pizzasList: pizzasListReducer,
+});
 
 export default rootReducer;

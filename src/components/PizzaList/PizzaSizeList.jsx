@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import cln from 'classnames';
-
-import { connect } from 'react-redux';
-import { setActiveSize } from '../../redux/actions';
 
 const PizzaSizeList = ({ sizes, initSize = {}, onSizeClick, pizzaId }) => {
   const activeSize = initSize.activeSize;
@@ -21,7 +18,6 @@ const PizzaSizeList = ({ sizes, initSize = {}, onSizeClick, pizzaId }) => {
         className={cln('pizza__size', {
           'pizza__size_disable': !size.available,
           'pizza__size_active': activeSize === index,
-          // 'pizza__size_active': activeSize === index && size.available,
         })}
       >
         {size.name}
@@ -32,10 +28,5 @@ const PizzaSizeList = ({ sizes, initSize = {}, onSizeClick, pizzaId }) => {
   return <div className='pizza__size-list'>{sizeList}</div>;
 };
 
-// const mapStateToProps = () => {};
-
-const mapDispatchToProps = {
-  onSizeClick: setActiveSize,
-};
-
-export default connect(null, mapDispatchToProps)(PizzaSizeList);
+// export default React.memo(PizzaSizeList);
+export default PizzaSizeList;

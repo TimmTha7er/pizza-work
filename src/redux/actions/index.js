@@ -1,5 +1,5 @@
-export { dataLoaded, dataRequested, dataError, fetchData } from './data';
-export { pizzasSort, pizzasFilter } from './filters';
+export { fetchData } from './data';
+export { pizzasSort, pizzasFilter, initPizzas } from './filters';
 export {
   setActiveBase,
   setActiveSize,

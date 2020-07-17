@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { CartItemList } from '../components';
 import { allPizzasRemovedFromCart } from '../redux/actions';
 
 const Cart = ({ totalCount, totalPrice, onClear }) => {
+  if (totalCount < 1) {
+    return <Redirect to="/empty-cart"/>;
+  }
+
   return (
     <section className='cart'>
       <div className='container cart__container'>

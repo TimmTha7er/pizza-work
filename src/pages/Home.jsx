@@ -1,101 +1,31 @@
-import React, { useEffect, useContext } from 'react';
-import {
-  Sort,
-  PizzasList,
-  Filters,
-  Spinner,
-  ErrorIndicator,
-  pizzaStoreContext,
-} from '../components';
-
+import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import {
-  dataLoaded,
-  dataRequested,
-  dataError,
-  initialActiveBases,
-  initialActiveSizes,
-  fetchData,
-} from '../redux/actions';
+import { Sort, PizzasList, Filters } from '../components';
 
-const Home = ({
-  pizzas,
-  filterCategories,
-  sortCategories,
-  loading,
-  error,
-  fetchData,
-}) => {
-  const pizzaStoreService = useContext(pizzaStoreContext);
-
-  useEffect(() => {
-    fetchData(pizzaStoreService);
-  }, []); //
-
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return <ErrorIndicator />;
-  }
-
+const Home = ({ title }) => {
   return (
     <section className='content'>
       <div className='content__top-line'>
-        <Filters filterCategories={filterCategories} />
-        <Sort sortCategories={sortCategories} />
+        <Filters />
+        <Sort />
       </div>
       <div className='content__body'>
-        <h2 className='content__title'>Все пиццы</h2>
-        <PizzasList pizzas={pizzas} />
+        <h2 className='content__title'>{title} пиццы</h2>
+        <PizzasList />
       </div>
     </section>
   );
 };
 
 const mapStateToProps = ({
-  data: {
-    data: { pizzas, filterCategories, sortCategories },
-    loading,
-    error,
-  },
+  filters: { filter },
+  data: { filterCategories },
 }) => {
-  // console.log(pizzas);
+  const title = filterCategories[filter].name;
+
   return {
-    pizzas,
-    filterCategories,
-    sortCategories,
-    loading,
-    error,
+    title,
   };
 };
 
-// const mapDispatchToProps = {
-//   dataLoaded,
-//   dataRequested,
-//   dataError,
-//   fetchData,
-// };
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchData: (pizzaStoreService) => {
-      dispatch(dataRequested());
-
-      pizzaStoreService
-        .getData()
-        .then((data) => {
-          dispatch(initialActiveBases(data));
-          dispatch(initialActiveSizes(data));
-          dispatch(dataLoaded(data));
-        })
-        // .then(() => dispatch(initialActiveBases()))
-        // .then(() => dispatch(initialActiveSizes()))
-        .catch((err) => dispatch(dataError(err)));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home);

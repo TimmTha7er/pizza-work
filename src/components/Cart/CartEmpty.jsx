@@ -1,15 +1,20 @@
 import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import emptyCartImg from '../../img/cart/empty-cart.png';
-import { Link } from "react-router-dom";
 
-const CartEmpty = () => {
+const CartEmpty = ({ totalCount }) => {
+  if (totalCount > 0) {
+    return <Redirect to='/cart' />;
+  }
+
   return (
     <section className='empty-cart'>
       <div className='container empty-cart__container'>
         <h2 className='empty-cart__title'>Корзина пуста</h2>
         <p className='empty-cart__text'>
-          Вероятней всего, вы не заказывали ещё пиццу.{' '}
+          Вероятней всего, вы не заказывали ещё пиццу.
           <br className='empty-cart__br' />
           Для того, чтобы заказать пиццу, перейди на главную страницу.
         </p>
@@ -21,10 +26,22 @@ const CartEmpty = () => {
             className='empty-cart__img'
           />
         </div>
-        <Link to='/' className='empty-cart__btn button'>Вернуться назад</Link>
+        <Link to='/' className='empty-cart__btn button'>
+          Вернуться назад
+        </Link>
       </div>
     </section>
   );
 };
 
-export default CartEmpty;
+const mapStateToProps = ({
+  cart: {
+    orderTotal: { count },
+  },
+}) => {
+  return {
+    totalCount: count,
+  };
+};
+
+export default connect(mapStateToProps, null)(CartEmpty);

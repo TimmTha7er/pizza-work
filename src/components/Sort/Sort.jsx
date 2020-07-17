@@ -4,13 +4,11 @@ import cln from 'classnames';
 import { connect } from 'react-redux';
 import { pizzasSort } from '../../redux/actions';
 
-// const categories = ['популярности', 'цене', 'алфавиту'];
-
-const Sort = ({ items, onSortPizza }) => {
-  const [activeItem, setActiveItem] = useState(0);
+const Sort = ({ items, sortBy, onSortPizza }) => {
+  const [activeItem, setActiveItem] = useState(sortBy);
   const [visiblePopup, setVisiblePopup] = useState(false);
+  const activeLabel = items[activeItem] || '';
   const sortRef = useRef();
-  const activeLabel = items[activeItem];
 
   useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick);
@@ -24,7 +22,7 @@ const Sort = ({ items, onSortPizza }) => {
     setActiveItem(index);
     setVisiblePopup(false);
 
-    onSortPizza(items[index]);
+    onSortPizza(items[index].name);
   };
 
   const handleOutsideClick = (e) => {
@@ -32,6 +30,20 @@ const Sort = ({ items, onSortPizza }) => {
       setVisiblePopup(false);
     }
   };
+
+  const categoriesList = items.map(({ id, name }, index) => {
+    return (
+      <li
+        key={id}
+        onClick={onPopupItemClick(index)}
+        className={cln('sort-popup__item', {
+          'sort-popup__item_active': activeItem === index,
+        })}
+      >
+        {name}
+      </li>
+    );
+  });
 
   return (
     <div
@@ -43,40 +55,29 @@ const Sort = ({ items, onSortPizza }) => {
     >
       <span className='sort__label'>Сортировка по:&nbsp;</span>
       <span onClick={onSelectedCategoryClick} className='sort__selected-item'>
-        {activeLabel}
+        {activeLabel.name}
       </span>
 
       {visiblePopup && (
         <div className='sort-popup sort__sort-popup'>
-          <ul className='sort-popup__list'>
-            {items.map((name, index) => {
-              return (
-                <li
-                  key={index}
-                  onClick={onPopupItemClick(index)}
-                  className={cln('sort-popup__item', {
-                    'sort-popup__item_active': activeItem === index,
-                  })}
-                >
-                  {name}
-                </li>
-              );
-            })}
-          </ul>
+          <ul className='sort-popup__list'>{categoriesList}</ul>
         </div>
       )}
     </div>
   );
 };
 
-const mapStateToProps = ({ filters: { sortCategories } }) => {
+const mapStateToProps = ({ filters: { sortBy }, data: { sortCategories } }) => {
+  const sortByIndex = sortCategories.findIndex((el) => el.name === sortBy);
+
   return {
     items: sortCategories,
+    sortBy: sortByIndex,
   };
 };
 
-const mapDispatchToProps = {
+const mapDistatchToProps = {
   onSortPizza: pizzasSort,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sort);
+export default connect(mapStateToProps, mapDistatchToProps)(Sort);

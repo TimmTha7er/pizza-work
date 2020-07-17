@@ -1,31 +1,38 @@
-export const dataRequested = () => {
+import { initialActiveBases, initialActiveSizes } from './pizzas-list';
+import { initPizzas, pizzasSort } from './filters';
+
+const dataRequested = () => {
   return {
     type: 'FETCH_DATA_REQUESTED',
   };
 };
 
-export const dataLoaded = (newPizzas) => {
+const dataLoaded = (newPizzas) => {
   return {
     type: 'FETCH_DATA_LOADED',
     payload: newPizzas,
   };
 };
 
-export const dataError = (error) => {
+const dataError = (error) => {
   return {
     type: 'FETCH_DATA_ERROR',
     payload: error,
   };
 };
 
-// ????????????????
-export const fetchData = (pizzaStoreService, dispatch) => () => {
-  console.log('pizzaStoreService', pizzaStoreService);
-  console.log('dispatch', dispatch);
+export const fetchData = (dispatch) => (pizzaStoreService) => {
   dispatch(dataRequested());
 
   pizzaStoreService
     .getData()
-    .then((data) => dispatch(dataLoaded(data)))
+    .then((data) => {
+      // ??????????
+      dispatch(initialActiveBases(data));
+      dispatch(initialActiveSizes(data));
+      dispatch(initPizzas(data.pizzas));
+      dispatch(pizzasSort());
+      dispatch(dataLoaded(data));
+    })
     .catch((err) => dispatch(dataError(err)));
 };
