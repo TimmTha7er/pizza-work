@@ -3,7 +3,7 @@ import { PizzaBaseList, PizzaSizeList, PizzaButton } from '../../components';
 
 const Pizza = ({
   pizza,
-  onPizzaAddedToCart,
+  pizzaAddedToCart,
   activeBase,
   activeSize,
   count,
@@ -13,7 +13,7 @@ const Pizza = ({
   const { id, imageUrl, name, bases, sizes, price } = pizza;
 
   const handleAddedToCart = () => {
-    onPizzaAddedToCart(pizza, activeBase, activeSize);
+    pizzaAddedToCart(pizza, activeBase, activeSize);
   }
 
   return (

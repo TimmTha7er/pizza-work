@@ -1,21 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
-const CartButton = () => {
-  const { totalCount, totalPrice } = useSelector(
-    ({
-      cart: {
-        orderTotal: { price, count },
-      },
-    }) => {
-      return {
-        totalPrice: price,
-        totalCount: count,
-      };
-    }
-  );
-
+const CartButton = ({ totalCount, totalPrice }) => {
   return (
     <Link to='/cart' className='user-bar'>
       <div className='user-bar__summ icon-rouble'>{totalPrice}</div>
@@ -24,4 +11,15 @@ const CartButton = () => {
   );
 };
 
-export default CartButton;
+const mapStateToProps = ({
+  cart: {
+    orderTotal: { price, count },
+  },
+}) => {
+  return {
+    totalPrice: price,
+    totalCount: count,
+  };
+};
+
+export default connect(mapStateToProps, null)(CartButton);

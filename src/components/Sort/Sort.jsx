@@ -1,26 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import cln from 'classnames';
 
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { pizzasSort } from '../../redux/actions';
-import { useActions } from '../Hooks/useActions';
 
-const Sort = () => {
-  const { items, sortBy } = useSelector(
-    ({ filters: { sortBy }, data: { sortCategories } }) => {
-      const sortByIndex = sortCategories.findIndex((el) => el.name === sortBy);
-
-      return {
-        items: sortCategories,
-        sortBy: sortByIndex,
-      };
-    }
-  );
-
-  const { onSortPizza } = useActions({
-    onSortPizza: pizzasSort,
-  });
-
+const Sort = ({ items, sortBy, onSortPizza }) => {
   const [activeItem, setActiveItem] = useState(sortBy);
   const [visiblePopup, setVisiblePopup] = useState(false);
   const activeLabel = items[activeItem] || '';
@@ -83,4 +67,17 @@ const Sort = () => {
   );
 };
 
-export default Sort;
+const mapStateToProps = ({ filters: { sortBy }, data: { sortCategories } }) => {
+  const sortByIndex = sortCategories.findIndex((el) => el.name === sortBy);
+
+  return {
+    items: sortCategories,
+    sortBy: sortByIndex,
+  };
+};
+
+const mapDistatchToProps = {
+  onSortPizza: pizzasSort,
+};
+
+export default connect(mapStateToProps, mapDistatchToProps)(Sort);

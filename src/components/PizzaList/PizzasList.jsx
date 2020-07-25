@@ -1,35 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Pizza } from '../../components';
 
-import {  useSelector } from 'react-redux';
-import { useActions } from '../Hooks/useActions';
+import { connect } from 'react-redux';
 import {
   pizzaAddedToCart,
   setActiveSize,
   setActiveBase,
+  // initPizzas,
+  // pizzasSort,
+  // initialActiveBases,
+  // initialActiveSizes,
 } from '../../redux/actions';
 
-const PizzasList = () => {
-  const { items, activeBases, activeSizes, cartItems } = useSelector(
-    ({
-      filters: { sortedAndFiltredPizzas },
-      pizzasList: { activeBases, activeSizes },
-      cart: { cartItems },
-    }) => {
-      return {
-        activeBases,
-        activeSizes,
-        cartItems,
-        items: sortedAndFiltredPizzas,
-      };
-    }
-  );
-
-  const { onPizzaAddedToCart, onBaseClick, onSizeClick } = useActions({
-    onPizzaAddedToCart: pizzaAddedToCart,
-    onBaseClick: setActiveBase,
-    onSizeClick: setActiveSize,
-  });
+const PizzasList = ({
+  items,
+  activeBases,
+  activeSizes,
+  cartItems,
+  pizzaAddedToCart,
+  onBaseClick,
+  onSizeClick,
+  // initPizzas,
+  // pizzasSort,
+  // initialActiveBases,
+  // initialActiveSizes,
+}) => {
+  // useEffect(() => {
+  //   initialActiveBases(items);
+  //   initialActiveSizes(items);
+  //   initPizzas(items);
+  //   pizzasSort();
+  // }, []);
 
   const pizzasList = items.map((pizza) => {
     const activeBase = activeBases.find((el) => el.pizzaId === pizza.id);
@@ -48,7 +49,7 @@ const PizzasList = () => {
           onBaseClick,
           onSizeClick,
           count,
-          onPizzaAddedToCart,
+          pizzaAddedToCart,
         }}
       />
     );
@@ -57,4 +58,27 @@ const PizzasList = () => {
   return <div className='content__pizza-list'>{pizzasList}</div>;
 };
 
-export default PizzasList;
+const mapStateToProps = ({
+  filters: { sortedAndFiltredPizzas },
+  pizzasList: { activeBases, activeSizes },
+  cart: { cartItems },
+}) => {
+  return {
+    activeBases,
+    activeSizes,
+    cartItems,
+    items: sortedAndFiltredPizzas,
+  };
+};
+
+const mapDispatchToProps = {
+  pizzaAddedToCart,
+  onBaseClick: setActiveBase,
+  onSizeClick: setActiveSize,
+  // initPizzas,
+  // pizzasSort,
+  // initialActiveBases,
+  // initialActiveSizes,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PizzasList);
