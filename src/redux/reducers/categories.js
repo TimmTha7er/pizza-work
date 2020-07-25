@@ -38,16 +38,53 @@ const sortByCategory = (category, pizzas) => {
 };
 
 const initialState = {
+  filterCategories: [],
+  sortCategories: [],
   filter: 0,
   sortBy: 'популярности',
   sortedAndFiltredPizzas: [],
+  loading: true,
+  error: null,
 };
 
-const filtersReducer = (state = initialState, action) => {
-  if (action.type === 'INIT_PIZZAS') {
+const categoriesReducer = (state = initialState, action) => {
+  if (action.type === 'FETCH_CATEGORIES_REQUESTED') {
     return {
       ...state,
-      sortedAndFiltredPizzas: action.payload,
+      loading: true,
+      error: null,
+    };
+  }
+
+  if (action.type === 'FETCH_CATEGORIES_LOADED') {
+    const { filterCategories, sortCategories } = action.payload;
+
+    return {
+      ...state,
+      filterCategories: filterCategories,
+      sortCategories: sortCategories,
+      loading: false,
+      error: null,
+    };
+  }
+
+  if (action.type === 'FETCH_CATEGORIES_ERROR') {
+    return {
+      ...state,
+      filterCategories: [],
+      sortCategories: [],
+      loading: false,
+      error: action.payload,
+    };
+  }
+
+  if (action.type === 'INIT_PIZZAS') {
+    const pizzas = action.payload;
+    const sortedPizzas = sortByCategory(state.sortBy, pizzas);
+
+    return {
+      ...state,
+      sortedAndFiltredPizzas: sortedPizzas,
     };
   }
 
@@ -85,4 +122,4 @@ const filtersReducer = (state = initialState, action) => {
   return state;
 };
 
-export default filtersReducer;
+export default categoriesReducer;

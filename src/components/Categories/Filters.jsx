@@ -37,8 +37,8 @@ const Filters = ({ items, filter, onFilterClick, pizzas }) => {
 
 // export default React.memo(Filters);
 const mapStateToProps = ({
-  filters: { filter },
-  data: { filterCategories, pizzas },
+  categories: { filter, filterCategories },
+  pizzasList: { pizzas },
 }) => {
   return {
     items: filterCategories,

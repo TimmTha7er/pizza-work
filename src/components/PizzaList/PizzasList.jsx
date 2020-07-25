@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
-import { Pizza } from '../../components';
+import { Pizza, ErrorIndicator, PizzaLoader } from '../../components';
 
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
   pizzaAddedToCart,
   setActiveSize,
   setActiveBase,
-  // initPizzas,
-  // pizzasSort,
-  // initialActiveBases,
-  // initialActiveSizes,
+  fetchPizzas,
 } from '../../redux/actions';
 
 const PizzasList = ({
@@ -20,65 +18,85 @@ const PizzasList = ({
   pizzaAddedToCart,
   onBaseClick,
   onSizeClick,
-  // initPizzas,
-  // pizzasSort,
-  // initialActiveBases,
-  // initialActiveSizes,
+  loading,
+  error,
+  fetchPizzas,
 }) => {
-  // useEffect(() => {
-  //   initialActiveBases(items);
-  //   initialActiveSizes(items);
-  //   initPizzas(items);
-  //   pizzasSort();
-  // }, []);
+  useEffect(() => {
+    if (items.length === 0) {
+      // ??
+      fetchPizzas();
+    }
+  }, []);
 
-  const pizzasList = items.map((pizza) => {
-    const activeBase = activeBases.find((el) => el.pizzaId === pizza.id);
-    const activeSize = activeSizes.find((el) => el.pizzaId === pizza.id);
-    const count = cartItems.reduce((count, cur) => {
-      return cur.pizzaId === pizza.id ? count + cur.count : count;
-    }, 0);
+  if (error) {
+    return <ErrorIndicator />;
+  }
 
-    return (
-      <Pizza
-        key={pizza.id}
-        pizza={pizza}
-        {...{
-          activeBase,
-          activeSize,
-          onBaseClick,
-          onSizeClick,
-          count,
-          pizzaAddedToCart,
-        }}
-      />
-    );
-  });
+  let pizzasList;
+
+  if (loading) {
+    pizzasList = Array(12)
+      .fill(0)
+      .map((_, index) => <PizzaLoader key={index} />);
+  } else {
+    pizzasList = items.map((pizza) => {
+      const activeBase = activeBases.find((el) => el.pizzaId === pizza.id);
+      const activeSize = activeSizes.find((el) => el.pizzaId === pizza.id);
+      const count = cartItems.reduce((count, cur) => {
+        return cur.pizzaId === pizza.id ? count + cur.count : count;
+      }, 0);
+
+      return (
+        <Pizza
+          key={pizza.id}
+          pizza={pizza}
+          {...{
+            activeBase,
+            activeSize,
+            onBaseClick,
+            onSizeClick,
+            count,
+            pizzaAddedToCart,
+          }}
+        />
+      );
+    });
+  }
 
   return <div className='content__pizza-list'>{pizzasList}</div>;
 };
 
 const mapStateToProps = ({
-  filters: { sortedAndFiltredPizzas },
-  pizzasList: { activeBases, activeSizes },
+  categories: { sortedAndFiltredPizzas, filter, filterCategories },
+  pizzasList: { activeBases, activeSizes, loading, error },
   cart: { cartItems },
 }) => {
+  const title = filterCategories[filter] && filterCategories[filter].name;
+
   return {
     activeBases,
     activeSizes,
     cartItems,
     items: sortedAndFiltredPizzas,
+    loading,
+    error,
+    title,
   };
 };
 
-const mapDispatchToProps = {
-  pizzaAddedToCart,
-  onBaseClick: setActiveBase,
-  onSizeClick: setActiveSize,
-  // initPizzas,
-  // pizzasSort,
-  // initialActiveBases,
-  // initialActiveSizes,
+const mapDispatchToProps = (dispatch, { pizzaStoreService }) => {
+  return {
+    ...bindActionCreators(
+      {
+        pizzaAddedToCart: pizzaAddedToCart,
+        onBaseClick: setActiveBase,
+        onSizeClick: setActiveSize,
+      },
+      dispatch
+    ),
+    fetchPizzas: fetchPizzas(dispatch, pizzaStoreService),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PizzasList);

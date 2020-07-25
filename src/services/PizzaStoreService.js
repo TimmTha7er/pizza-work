@@ -225,14 +225,57 @@ export default class PizzaService {
     // ],
   };
 
-  getData() {
+  _findActiveElement(elements) {
+    return elements.findIndex((el) => {
+      return el.available === true;
+    });
+  }
+
+  _getActiveBases() {
+    const activeBases = this._data.pizzas.map((pizza) => {
+      return {
+        pizzaId: pizza.id,
+        activeBase: this._findActiveElement(pizza.bases),
+      };
+    });
+
+    return activeBases;
+  }
+
+  _getActiveSizes() {
+    const activeSizes = this._data.pizzas.map((pizza) => {
+      return {
+        pizzaId: pizza.id,
+        activeSize: this._findActiveElement(pizza.sizes),
+      };
+    });
+
+    return activeSizes;
+  }
+
+  getPizzas() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // if (Math.random() > 0.75) {
         //   reject(new Error('Something bad happened'));
         // } else {
-        resolve(this._data);
+        resolve({
+          pizzas: this._data.pizzas,
+          activeBases: this._getActiveBases(),
+          activeSizes: this._getActiveSizes(),
+        });
         // }
+      }, 700);
+    });
+  }
+
+  getCategories() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          filterCategories: this._data.filterCategories,
+          sortCategories: this._data.sortCategories,
+        });
       }, 700);
     });
   }

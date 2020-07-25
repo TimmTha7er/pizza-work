@@ -1,30 +1,41 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import '../scss/index.scss';
 import { Home, Cart } from '../pages';
 import { Header, NotFound, CartEmpty } from './';
-import { Spinner, ErrorIndicator, pizzaStoreContext } from '../components';
-import { connect } from 'react-redux';
-import { fetchData } from '../redux/actions';
 
 // TODO
-// add redux hooks
+// 1
+// сортировку и фильтр нужно делать на сервере т.е. наше приложение
+// должно просто говорить какие данные оно хочет получить
+// сервер должен делать все сложные манипуляции с данными и
+// возвращать их
+// ответ на мой вопрос в начале видео
+// https://www.youtube.com/watch?v=IZVNNc8FHYg
+// Значит решиться проблема в редюсерами для сортировка и
+// не нужно будет дополнительный массив делать
 
-const App = ({ loading, error, fetchData }) => {
-  const pizzaStoreService = useContext(pizzaStoreContext);
 
-  useEffect(() => {
-    fetchData(pizzaStoreService);
-  }, []); //
+// 5
+// создать сервак на Node.js
+// в этом видео все есть https://www.youtube.com/watch?v=ivDjWYcKDZI
+// так же есть на компе у code dojo есть CRUD пример с туду
+//  и что-то есть в моих записях Evernote
 
-  if (loading) {
-    return <Spinner />;
-  }
+// Когда будет сервак
+// Сверстать форму логина для сайта
+// 1 сделать логин(jwt токен и т.д. как в видео)
+// 2 Создать БД(mongoDB)
+// 3 подключить mongoDB
+// 4 Сделать сортировку с помощью БД
 
-  if (error) {
-    return <ErrorIndicator />;
-  }
+// 5 Добавить формы для категорий фильтра и сортировки и пицц
+// 6 сделать добавление удаление редактирование пицц, фильров и сортировок
 
+// 7 добавить обработку ошибок
+// 8 сверстать NotFound, Spinner
+
+const App = () => {
   return (
     <div className='container'>
       <Header />
@@ -40,17 +51,4 @@ const App = ({ loading, error, fetchData }) => {
   );
 };
 
-const mapStateToProps = ({ data: { loading, error } }) => {
-  return {
-    loading,
-    error,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchData: fetchData(dispatch),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

@@ -6,14 +6,17 @@ export { default as CartItem } from './Cart/CartItem';
 export { default as CartEmpty } from './Cart/CartEmpty';
 export { default as CartItemList } from './Cart/CartItemList';
 
-export { default as Sort } from './Sort/Sort';
-export { default as Filters } from './Sort/Filters';
+export { default as Categories } from './Categories/Categories';
+export { default as Sort } from './Categories/Sort';
+export { default as Filters } from './Categories/Filters';
+export { default as CategoriesLoader } from './Categories/CategoriesLoader';
 
 export { default as PizzasList } from './PizzaList/PizzasList';
 export { default as Pizza } from './PizzaList/Pizza';
 export { default as PizzaBaseList } from './PizzaList/PizzaBaseList';
 export { default as PizzaSizeList } from './PizzaList/PizzaSizeList';
 export { default as PizzaButton } from './PizzaList/PizzaButton';
+export { default as PizzaLoader } from './PizzaList/PizzaLoader';
 
 export { default as NotFound } from './supports/NotFound';
 export { default as ErrorBoundary } from './supports/ErrorBoundary';

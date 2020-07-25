@@ -45,6 +45,8 @@ const Sort = ({ items, sortBy, onSortPizza }) => {
     );
   });
 
+  // console.log(categoriesList)
+
   return (
     <div
       ref={sortRef}
@@ -67,7 +69,10 @@ const Sort = ({ items, sortBy, onSortPizza }) => {
   );
 };
 
-const mapStateToProps = ({ filters: { sortBy }, data: { sortCategories } }) => {
+const mapStateToProps = ({
+  categories: { sortBy, sortCategories },
+  // pizzasList: { sortCategories },
+}) => {
   const sortByIndex = sortCategories.findIndex((el) => el.name === sortBy);
 
   return {

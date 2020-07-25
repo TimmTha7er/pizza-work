@@ -1,15 +1,35 @@
-export const initialActiveBases = (data) => {
+import { initPizzas } from './categories';
+
+const pizzasRequested = () => {
   return {
-    type: 'INITIAL_ACTIVE_BASES',
-    payload: data,
+    type: 'FETCH_PIZZAS_REQUESTED',
   };
 };
 
-export const initialActiveSizes = (data) => {
+const pizzasLoaded = (newPizzas) => {
   return {
-    type: 'INITIAL_ACTIVE_SIZES',
-    payload: data,
+    type: 'FETCH_PIZZAS_LOADED',
+    payload: newPizzas,
   };
+};
+
+const pizzasError = (error) => {
+  return {
+    type: 'FETCH_PIZZAS_ERROR',
+    payload: error,
+  };
+};
+
+export const fetchPizzas = (dispatch, pizzaStoreService) => () => {
+  dispatch(pizzasRequested());
+
+  pizzaStoreService
+    .getPizzas()
+    .then((data) => {
+      dispatch(initPizzas(data.pizzas)); // уберем, когда подключим БД
+      dispatch(pizzasLoaded(data));
+    })
+    .catch((err) => dispatch(pizzasError(err)));
 };
 
 export const setActiveBase = (pizzaId, index) => {

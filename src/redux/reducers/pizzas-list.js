@@ -1,9 +1,3 @@
-const findActiveElement = (elements) => {
-  return elements.findIndex((el) => {
-    return el.available === true;
-  });
-};
-
 const setActive = (items, pizzaId, index, name) => {
   // находим индекс элемента
   const idx = items.findIndex((el) => el.pizzaId === pizzaId);
@@ -18,40 +12,43 @@ const setActive = (items, pizzaId, index, name) => {
 };
 
 const initialState = {
+  pizzas: [],
   activeBases: [],
   activeSizes: [],
+  loading: true,
+  error: null,
 };
 
 const pizzasListReducer = (state = initialState, action) => {
-  if (action.type === 'INITIAL_ACTIVE_BASES') {
-    const { pizzas } = action.payload;
-
-    const activeBases = pizzas.map((pizza) => {
-      return {
-        pizzaId: pizza.id,
-        activeBase: findActiveElement(pizza.bases),
-      };
-    });
-
+  if (action.type === 'FETCH_PIZZAS_REQUESTED') {
     return {
       ...state,
-      activeBases: activeBases,
+      loading: true,
+      error: null,
     };
   }
 
-  if (action.type === 'INITIAL_ACTIVE_SIZES') {
-    const { pizzas } = action.payload;
-    
-    const activeSizes = pizzas.map((pizza) => {
-      return {
-        pizzaId: pizza.id,
-        activeSize: findActiveElement(pizza.sizes),
-      };
-    });
+  if (action.type === 'FETCH_PIZZAS_LOADED') {
+    const { pizzas, activeBases, activeSizes } = action.payload;
 
     return {
       ...state,
-      activeSizes: activeSizes,
+      pizzas,
+      activeBases,
+      activeSizes,
+      loading: false,
+      error: null,
+    };
+  }
+
+  if (action.type === 'FETCH_PIZZAS_ERROR') {
+    return {
+      ...state,
+      pizzas: [],
+      activeBases: [],
+      activeSizes: [],
+      loading: false,
+      error: action.payload,
     };
   }
 

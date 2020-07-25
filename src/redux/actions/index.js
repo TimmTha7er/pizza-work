@@ -1,11 +1,10 @@
-export { fetchData } from './data';
-export { pizzasSort, pizzasFilter, initPizzas } from './filters';
 export {
-  setActiveBase,
-  setActiveSize,
-  initialActiveBases,
-  initialActiveSizes,
-} from './pizzas-list';
+  pizzasSort,
+  pizzasFilter,
+  initPizzas,
+  fetchCategories,
+} from './categories';
+export { fetchPizzas, setActiveBase, setActiveSize } from './pizzas-list';
 export {
   pizzaAddedToCart,
   pizzaRemovedFromCart,

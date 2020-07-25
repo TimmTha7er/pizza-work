@@ -1,14 +1,12 @@
 import cartReducer from './cart';
-import filtersReducer from './filters';
-import dataReducer from './data';
+import categoriesReducer from './categories';
 import pizzasListReducer from './pizzas-list';
 
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-  filters: filtersReducer,
-  data: dataReducer,
+  categories: categoriesReducer,
   pizzasList: pizzasListReducer,
 });
 
