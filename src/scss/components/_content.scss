@@ -125,7 +125,8 @@
   }
 
   &__label {
-    // cursor: pointer;
+    user-select: none;
+    cursor: pointer;
   }
   &__sort-popup {
     top: 40px;
@@ -140,6 +141,7 @@
     color: $accent-color;
     font-weight: normal;
     border-bottom: 1px dashed #fe5f1e;
+    user-select: none;
     cursor: pointer;
   }
 }

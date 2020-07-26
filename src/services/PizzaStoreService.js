@@ -253,14 +253,102 @@ export default class PizzaService {
     return activeSizes;
   }
 
-  getPizzas() {
+  _sortByRating = (pizzas, order) => {
+    switch (order) {
+      case 'asc':
+        return [...pizzas].sort((a, b) => a.rating - b.rating);
+
+      case 'descr':
+        return [...pizzas].sort((a, b) => b.rating - a.rating);
+
+      default:
+        return pizzas;
+    }
+  };
+
+  _sortByPrice = (pizzas, order) => {
+    switch (order) {
+      case 'asc':
+        return [...pizzas].sort((a, b) => a.price - b.price);
+
+      case 'descr':
+        return [...pizzas].sort((a, b) => b.price - a.price);
+
+      default:
+        return pizzas;
+    }
+  };
+
+  _sortByAlphabet = (pizzas, order) => {
+    switch (order) {
+      case 'asc':
+        return [...pizzas].sort((a, b) => {
+          const x = a.name.toLowerCase();
+          const y = b.name.toLowerCase();
+
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+
+      case 'descr':
+        return [...pizzas].sort((a, b) => {
+          const x = b.name.toLowerCase();
+          const y = a.name.toLowerCase();
+
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+
+      default:
+        return pizzas;
+    }
+  };
+
+  _sortByCategory = (category, order, pizzas) => {
+    switch (category) {
+      case 'популярности':
+        return this._sortByRating(pizzas, order);
+
+      case 'цене':
+        return this._sortByPrice(pizzas, order);
+
+      case 'алфавиту':
+        return this._sortByAlphabet(pizzas, order);
+
+      default:
+        return this._sortByRating(pizzas, order);
+    }
+  };
+
+  getPizzas(filter, sortBy, order) {
+    const sortedPizzas = this._sortByCategory(sortBy, order, this._data.pizzas);
+    let filteredPizzas;
+
+    if (filter === 0) {
+      filteredPizzas = sortedPizzas;
+    } else {
+      filteredPizzas = sortedPizzas.filter(
+        (pizza) => pizza.category === filter
+      );
+    }
+
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // if (Math.random() > 0.75) {
         //   reject(new Error('Something bad happened'));
         // } else {
         resolve({
-          pizzas: this._data.pizzas,
+          pizzas: filteredPizzas,
           activeBases: this._getActiveBases(),
           activeSizes: this._getActiveSizes(),
         });

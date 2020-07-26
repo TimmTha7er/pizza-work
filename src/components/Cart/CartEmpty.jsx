@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import emptyCartImg from '../../img/cart/empty-cart.png';
 
 const CartEmpty = ({ totalCount }) => {

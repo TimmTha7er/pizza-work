@@ -1,7 +1,5 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
-// https://github.com/danilowoz/react-content-loader
-// https://create-content-loader.now.sh
 
 const PizzaLoader = (props) => {
   return (

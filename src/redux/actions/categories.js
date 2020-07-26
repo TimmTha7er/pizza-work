@@ -29,24 +29,23 @@ export const fetchCategories = (dispatch, pizzaStoreService) => () => {
     .catch((err) => dispatch(categoriesError(err)));
 };
 
-export const pizzasSort = (category) => {
+export const setSortCategory = (category) => {
   return {
-    type: 'PIZZA_SORT',
-    payload: { category },
+    type: 'SET_SORT_CATEGORY',
+    payload: category,
   };
 };
 
-export const pizzasFilter = (filter, pizzas) => {
+export const setFilterCategory = (filter) => {
   return {
-    type: 'PIZZA_FILTER',
-    payload: { filter, pizzas },
+    type: 'SET_FILTER_CATEGORY',
+    payload: filter,
   };
 };
 
-// удалим, когда подключим БД
-export const initPizzas = (pizzas) => {
+export const setSortOrder = (order) => {
   return {
-    type: 'INIT_PIZZAS',
-    payload: pizzas,
+    type: 'SET_SORT_ORDER',
+    payload: order,
   };
 };

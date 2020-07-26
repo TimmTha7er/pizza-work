@@ -21,13 +21,13 @@ const PizzasList = ({
   loading,
   error,
   fetchPizzas,
+  filter,
+  sortBy,
+  order,
 }) => {
   useEffect(() => {
-    if (items.length === 0) {
-      // ??
-      fetchPizzas();
-    }
-  }, []);
+    fetchPizzas(filter, sortBy, order);
+  }, [filter, sortBy, order]);
 
   if (error) {
     return <ErrorIndicator />;
@@ -68,8 +68,8 @@ const PizzasList = ({
 };
 
 const mapStateToProps = ({
-  categories: { sortedAndFiltredPizzas, filter, filterCategories },
-  pizzasList: { activeBases, activeSizes, loading, error },
+  categories: { filter, sortBy, order, filterCategories },
+  pizzasList: { pizzas, activeBases, activeSizes, loading, error },
   cart: { cartItems },
 }) => {
   const title = filterCategories[filter] && filterCategories[filter].name;
@@ -78,10 +78,13 @@ const mapStateToProps = ({
     activeBases,
     activeSizes,
     cartItems,
-    items: sortedAndFiltredPizzas,
+    items: pizzas,
     loading,
     error,
     title,
+    sortBy,
+    order,
+    filter,
   };
 };
 

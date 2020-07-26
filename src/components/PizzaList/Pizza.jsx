@@ -14,7 +14,7 @@ const Pizza = ({
 
   const handleAddedToCart = () => {
     pizzaAddedToCart(pizza, activeBase, activeSize);
-  }
+  };
 
   return (
     <div className='pizza content__pizza'>
@@ -38,10 +38,7 @@ const Pizza = ({
       </div>
       <div className='pizza__bot-line'>
         <div className='pizza__price icon-rouble'>{price}</div>
-        <PizzaButton
-          onBtnClick={handleAddedToCart}
-          count={count}
-        />
+        <PizzaButton onBtnClick={handleAddedToCart} count={count} />
       </div>
     </div>
   );

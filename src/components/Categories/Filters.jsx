@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import cln from 'classnames';
 
 import { connect } from 'react-redux';
-import { pizzasFilter } from '../../redux/actions';
+import { setFilterCategory } from '../../redux/actions';
 
 const Filters = ({ items, filter, onFilterClick, pizzas }) => {
   const [activeItem, setActiveItem] = useState(filter);
@@ -35,7 +35,6 @@ const Filters = ({ items, filter, onFilterClick, pizzas }) => {
   );
 };
 
-// export default React.memo(Filters);
 const mapStateToProps = ({
   categories: { filter, filterCategories },
   pizzasList: { pizzas },
@@ -48,7 +47,7 @@ const mapStateToProps = ({
 };
 
 const mapDistatchToProps = {
-  onFilterClick: pizzasFilter,
+  onFilterClick: setFilterCategory,
 };
 
 export default connect(mapStateToProps, mapDistatchToProps)(Filters);

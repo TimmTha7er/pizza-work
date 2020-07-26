@@ -1,5 +1,3 @@
-import { initPizzas } from './categories';
-
 const pizzasRequested = () => {
   return {
     type: 'FETCH_PIZZAS_REQUESTED',
@@ -20,13 +18,16 @@ const pizzasError = (error) => {
   };
 };
 
-export const fetchPizzas = (dispatch, pizzaStoreService) => () => {
+export const fetchPizzas = (dispatch, pizzaStoreService) => (
+  filter,
+  sortBy,
+  order
+) => {
   dispatch(pizzasRequested());
 
   pizzaStoreService
-    .getPizzas()
+    .getPizzas(filter, sortBy, order)
     .then((data) => {
-      dispatch(initPizzas(data.pizzas)); // уберем, когда подключим БД
       dispatch(pizzasLoaded(data));
     })
     .catch((err) => dispatch(pizzasError(err)));

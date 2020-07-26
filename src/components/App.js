@@ -5,6 +5,7 @@ import { Home, Cart } from '../pages';
 import { Header, NotFound, CartEmpty } from './';
 
 // TODO
+// продолжить https://youtu.be/Ix9iV72GMKg?t=7342
 // 1
 // сортировку и фильтр нужно делать на сервере т.е. наше приложение
 // должно просто говорить какие данные оно хочет получить

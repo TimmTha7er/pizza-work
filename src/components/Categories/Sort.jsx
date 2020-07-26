@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import cln from 'classnames';
 
 import { connect } from 'react-redux';
-import { pizzasSort } from '../../redux/actions';
+import { setSortCategory, setSortOrder } from '../../redux/actions';
 
-const Sort = ({ items, sortBy, onSortPizza }) => {
+const Sort = ({ items, sortBy, order, onSortPizza, onSortLabel }) => {
   const [activeItem, setActiveItem] = useState(sortBy);
   const [visiblePopup, setVisiblePopup] = useState(false);
   const activeLabel = items[activeItem] || '';
@@ -16,6 +16,10 @@ const Sort = ({ items, sortBy, onSortPizza }) => {
 
   const onSelectedCategoryClick = () => {
     setVisiblePopup((prev) => !prev);
+  };
+
+  const toggleOrder = () => {
+    order === 'asc' ? onSortLabel('descr') : onSortLabel('asc');
   };
 
   const onPopupItemClick = (index) => () => {
@@ -45,17 +49,17 @@ const Sort = ({ items, sortBy, onSortPizza }) => {
     );
   });
 
-  // console.log(categoriesList)
-
   return (
     <div
       ref={sortRef}
       className={cln('sort', {
-        'icon-up-dir': visiblePopup,
-        'icon-down-dir': !visiblePopup,
+        'icon-up-dir': order === 'asc',
+        'icon-down-dir': order === 'descr',
       })}
     >
-      <span className='sort__label'>Сортировка по:&nbsp;</span>
+      <span onClick={toggleOrder} className='sort__label'>
+        Сортировка по:&nbsp;
+      </span>
       <span onClick={onSelectedCategoryClick} className='sort__selected-item'>
         {activeLabel.name}
       </span>
@@ -69,20 +73,19 @@ const Sort = ({ items, sortBy, onSortPizza }) => {
   );
 };
 
-const mapStateToProps = ({
-  categories: { sortBy, sortCategories },
-  // pizzasList: { sortCategories },
-}) => {
+const mapStateToProps = ({ categories: { sortBy, sortCategories, order } }) => {
   const sortByIndex = sortCategories.findIndex((el) => el.name === sortBy);
 
   return {
     items: sortCategories,
     sortBy: sortByIndex,
+    order,
   };
 };
 
 const mapDistatchToProps = {
-  onSortPizza: pizzasSort,
+  onSortPizza: setSortCategory,
+  onSortLabel: setSortOrder,
 };
 
 export default connect(mapStateToProps, mapDistatchToProps)(Sort);

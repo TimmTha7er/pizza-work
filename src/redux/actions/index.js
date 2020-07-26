@@ -1,7 +1,7 @@
 export {
-  pizzasSort,
-  pizzasFilter,
-  initPizzas,
+  setSortCategory,
+  setFilterCategory,
+  setSortOrder,
   fetchCategories,
 } from './categories';
 export { fetchPizzas, setActiveBase, setActiveSize } from './pizzas-list';
