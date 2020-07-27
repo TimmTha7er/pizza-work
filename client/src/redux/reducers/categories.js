@@ -3,7 +3,7 @@ const initialState = {
   sortCategories: [],
   filter: 0,
   sortBy: 'популярности',
-  order: 'asc',
+  order: 'descr',
   loading: true,
   error: null,
 };

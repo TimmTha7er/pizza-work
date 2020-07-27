@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "jwtSecret": "my_jwt_Secret",
+  "mongoUri": "mongodb+srv://Timm:Q1234567w_@pizza.8d8nq.azure.mongodb.net/Pizza?retryWrites=true&w=majority"
+}

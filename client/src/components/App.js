@@ -1,12 +1,15 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import '../scss/index.scss';
-import { Home, Cart } from '../pages';
-import { Header, NotFound, CartEmpty } from './';
+import { Home, Cart, Auth } from '../pages';
+import { Header, NotFound, CartEmpty, EditPizza } from './';
 
 // TODO
-// продолжить https://youtu.be/Ix9iV72GMKg?t=7342
 // 1
+// продолжить
+
+// 2 Когда будет сервак :
+// продолжить https://youtu.be/Ix9iV72GMKg?t=7342
 // сортировку и фильтр нужно делать на сервере т.е. наше приложение
 // должно просто говорить какие данные оно хочет получить
 // сервер должен делать все сложные манипуляции с данными и
@@ -16,35 +19,36 @@ import { Header, NotFound, CartEmpty } from './';
 // Значит решиться проблема в редюсерами для сортировка и
 // не нужно будет дополнительный массив делать
 
+// 3 Сверстать форму логина для сайта
+// 4 сделать логин(jwt токен и т.д. как в видео)
+// 5 Создать БД(mongoDB)
+// 6 подключить mongoDB
+// 7 Сделать сортировку с помощью БД
 
-// 5
-// создать сервак на Node.js
-// в этом видео все есть https://www.youtube.com/watch?v=ivDjWYcKDZI
-// так же есть на компе у code dojo есть CRUD пример с туду
-//  и что-то есть в моих записях Evernote
+// 8 Добавить формы для категорий фильтра и сортировки и пицц
+// 9 сделать добавление удаление редактирование пицц, фильров и сортировок
 
-// Когда будет сервак
-// Сверстать форму логина для сайта
-// 1 сделать логин(jwt токен и т.д. как в видео)
-// 2 Создать БД(mongoDB)
-// 3 подключить mongoDB
-// 4 Сделать сортировку с помощью БД
-
-// 5 Добавить формы для категорий фильтра и сортировки и пицц
-// 6 сделать добавление удаление редактирование пицц, фильров и сортировок
-
-// 7 добавить обработку ошибок
-// 8 сверстать NotFound, Spinner
+// 10 добавить обработку ошибок
+// 11 сверстать NotFound, Spinner
 
 const App = () => {
+  const isAuth = true;
+  let adminContent = null;
+
+  if (isAuth) {
+    adminContent = <Route path='/edit-pizza' component={EditPizza} />
+  }
+
   return (
     <div className='container'>
       <Header />
       <main>
         <Switch>
           <Route path='/' component={Home} exact />
+          <Route path='/auth' component={Auth} />
           <Route path='/cart' component={Cart} />
           <Route path='/empty-cart' component={CartEmpty} />
+          {adminContent}
           <Route component={NotFound} />
         </Switch>
       </main>
