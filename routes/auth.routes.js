@@ -20,7 +20,7 @@ router.post(
       const errors = validationResult(req);
 
       // доработать
-      console.log(errors)
+      console.log(errors);
 
       if (!errors.isEmpty()) {
         return res.status(400).json({
@@ -42,7 +42,7 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
 
-      console.log('hashedPassword', hashedPassword)
+      console.log('hashedPassword', hashedPassword);
 
       const user = new User({ email, password: hashedPassword });
 

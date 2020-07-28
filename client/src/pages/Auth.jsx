@@ -16,7 +16,7 @@ const request = async (url, method = 'GET', body = null, headers = {}) => {
 
     return data;
   } catch (e) {
-    console.log('request catch', e.message)
+    console.log('request catch', e.message);
     throw e;
   }
 };
@@ -34,6 +34,22 @@ const Auth = () => {
       console.log('auth', data.message);
     } catch (e) {}
   };
+
+  const loginHandler = async () => {
+    try {
+      const data = await request('/api/auth/login', 'POST', { ...form });
+      console.log('auth', data);
+
+      localStorage.setItem(
+        'userData',
+        JSON.stringify({ userId: data.userId, token: data.token })
+      );
+    } catch (e) {}
+  };
+
+  const logaut = () => {
+    localStorage.removeItem('userData');
+  }
 
   return (
     <>
@@ -54,7 +70,7 @@ const Auth = () => {
         onChange={changeHandler}
       />
       <label htmlFor='password'>Password</label>
-      <button>Войти</button>
+      <button onClick={loginHandler}>Войти</button>
       <button onClick={registerHandler}>Регистрация</button>
     </>
   );

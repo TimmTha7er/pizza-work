@@ -1,253 +1,12 @@
 export default class PizzaService {
-  _data = {
-    pizzas: [
-      {
-        id: 0,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/f035c7f46c0844069722f2bb3ee9f113_584x584.jpeg',
-        name: 'Пепперони Фреш с перцем',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: true },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: true },
-          { name: '40', available: true },
-        ],
-        // bases: [0, 1],
-        // sizes: [26, 30, 40],
-        price: 803,
-        category: 0,
-        rating: 4,
-      },
-      {
-        id: 1,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/2ffc31bb-132c-4c99-b894-53f7107a1441.jpg',
-        name: 'Сырная',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: false },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: false },
-          { name: '40', available: true },
-        ],
-        // bases: [0],
-        // sizes: [26, 40],
-        price: 245,
-        category: 1,
-        rating: 6,
-      },
-      {
-        id: 2,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/6652fec1-04df-49d8-8744-232f1032c44b.jpg',
-        name: 'Цыпленок барбекю',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: false },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: false },
-          { name: '40', available: true },
-        ],
-        // bases: [0],
-        // sizes: [26, 40],
-        price: 295,
-        category: 1,
-        rating: 4,
-      },
-      {
-        id: 3,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/af553bf5-3887-4501-b88e-8f0f55229429.jpg',
-        name: 'Кисло-сладкий цыпленок',
-        bases: [
-          { name: 'тонкое', available: false },
-          { name: 'традиционное', available: true },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: true },
-          { name: '40', available: true },
-        ],
-        // bases: [1],
-        // sizes: [26, 30, 40],
-        price: 275,
-        category: 2,
-        rating: 2,
-      },
-      {
-        id: 4,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg',
-        name: 'Чизбургер-пицца',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: true },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: true },
-          { name: '40', available: true },
-        ],
-        // bases: [0, 1],
-        // sizes: [26, 30, 40],
-        price: 415,
-        category: 3,
-        rating: 8,
-      },
-      {
-        id: 5,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/1e1a6e80-b3ba-4a44-b6b9-beae5b1fbf27.jpg',
-        name: 'Крэйзи пепперони',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: false },
-        ],
-        sizes: [
-          { name: '26', available: false },
-          { name: '30', available: true },
-          { name: '40', available: true },
-        ],
-        // bases: [0],
-        // sizes: [30, 40],
-        price: 580,
-        category: 2,
-        rating: 2,
-      },
-      {
-        id: 6,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/d2e337e9-e07a-4199-9cc1-501cc44cb8f8.jpg',
-        name: 'Пепперони',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: true },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: true },
-          { name: '40', available: true },
-        ],
-        // bases: [0, 1],
-        // sizes: [26, 30, 40],
-        price: 675,
-        category: 1,
-        rating: 9,
-      },
-      {
-        id: 7,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/d48003cd-902c-420d-9f28-92d9dc5f73b4.jpg',
-        name: 'Маргарита',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: true },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: true },
-          { name: '40', available: true },
-        ],
-        // bases: [0, 1],
-        // sizes: [26, 30, 40],
-        price: 450,
-        category: 4,
-        rating: 10,
-      },
-      {
-        id: 8,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/ec29465e-606b-4a04-a03e-da3940d37e0e.jpg',
-        name: 'Четыре сезона',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: true },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: true },
-          { name: '40', available: true },
-        ],
-        // bases: [0, 1],
-        // sizes: [26, 30, 40],
-        price: 395,
-        category: 5,
-        rating: 10,
-      },
-      {
-        id: 9,
-        imageUrl:
-          'https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/30367198-f3bd-44ed-9314-6f717960da07.jpg',
-        name: 'Овощи и грибы 🌱',
-        bases: [
-          { name: 'тонкое', available: true },
-          { name: 'традиционное', available: true },
-        ],
-        sizes: [
-          { name: '26', available: true },
-          { name: '30', available: true },
-          { name: '40', available: true },
-        ],
-        // bases: [0, 1],
-        // sizes: [26, 30, 40],
-        price: 285,
-        category: 5,
-        rating: 7,
-      },
-    ],
-    filterCategories: [
-      { id: 0, name: 'Все' },
-      { id: 1, name: 'Мясные' },
-      { id: 2, name: 'Вегетарианские' },
-      { id: 3, name: 'Гриль' },
-      { id: 4, name: 'Острые' },
-    ],
-    sortCategories: [
-      { id: 0, name: 'популярности' },
-      { id: 1, name: 'цене' },
-      { id: 2, name: 'алфавиту' },
-    ],
-    // bases: [
-    //   { id: 0, name: 'тонкое' },
-    //   { id: 1, name: 'традиционное' },
-    // ],
-    // sizes: [
-    //   { id: 0, name: 26 },
-    //   { id: 1, name: 30 },
-    //   { id: 2, name: 40 },
-    // ],
-  };
-
-  async _http(url, method = 'GET', body = null, headers = {}) {
-    try {
-      const response = await fetch(url, { method, body, headers });
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Что-то пошло не так');
-      }
-
-      return data;
-    } catch (e) {
-      throw e;
-    }
-  }
-
   _findActiveElement(elements) {
     return elements.findIndex((el) => {
       return el.available === true;
     });
   }
 
-  _getActiveBases() {
-    const activeBases = this._data.pizzas.map((pizza) => {
+  _getActiveBases(res) {
+    const activeBases = res.map((pizza) => {
       return {
         pizzaId: pizza.id,
         activeBase: this._findActiveElement(pizza.bases),
@@ -257,8 +16,8 @@ export default class PizzaService {
     return activeBases;
   }
 
-  _getActiveSizes() {
-    const activeSizes = this._data.pizzas.map((pizza) => {
+  _getActiveSizes(res) {
+    const activeSizes = res.map((pizza) => {
       return {
         pizzaId: pizza.id,
         activeSize: this._findActiveElement(pizza.sizes),
@@ -268,118 +27,35 @@ export default class PizzaService {
     return activeSizes;
   }
 
-  _sortByRating = (pizzas, order) => {
-    switch (order) {
-      case 'asc':
-        return [...pizzas].sort((a, b) => a.rating - b.rating);
+  _getResource = async (url) => {
+    const res = await fetch(url);
 
-      case 'descr':
-        return [...pizzas].sort((a, b) => b.rating - a.rating);
-
-      default:
-        return pizzas;
+    if (!res.ok) {
+      throw new Error(`Could not fetch ${url}` + `, received ${res.status}`);
     }
+
+    return await res.json();
   };
 
-  _sortByPrice = (pizzas, order) => {
-    switch (order) {
-      case 'asc':
-        return [...pizzas].sort((a, b) => a.price - b.price);
+  getPizzas = async (filter, sortBy, order) => {
+    const res = await this._getResource(
+      `/api/pizzas?_sort=${sortBy}&_order=${order}&_filter=${filter}`
+    );
 
-      case 'descr':
-        return [...pizzas].sort((a, b) => b.price - a.price);
-
-      default:
-        return pizzas;
-    }
+    return {
+      pizzas: res,
+      activeBases: this._getActiveBases(res),
+      activeSizes: this._getActiveSizes(res),
+    };
   };
 
-  _sortByAlphabet = (pizzas, order) => {
-    switch (order) {
-      case 'asc':
-        return [...pizzas].sort((a, b) => {
-          const x = a.name.toLowerCase();
-          const y = b.name.toLowerCase();
+  getCategories = async () => {
+    const res = await this._getResource(`/api/categories`);
+    const [{ filterCategories }, { sortCategories }] = res;
 
-          if (x < y) {
-            return -1;
-          }
-          if (x > y) {
-            return 1;
-          }
-          return 0;
-        });
-
-      case 'descr':
-        return [...pizzas].sort((a, b) => {
-          const x = b.name.toLowerCase();
-          const y = a.name.toLowerCase();
-
-          if (x < y) {
-            return -1;
-          }
-          if (x > y) {
-            return 1;
-          }
-          return 0;
-        });
-
-      default:
-        return pizzas;
-    }
+    return {
+      filterCategories: filterCategories,
+      sortCategories: sortCategories,
+    };
   };
-
-  _sortByCategory = (category, order, pizzas) => {
-    switch (category) {
-      case 'популярности':
-        return this._sortByRating(pizzas, order);
-
-      case 'цене':
-        return this._sortByPrice(pizzas, order);
-
-      case 'алфавиту':
-        return this._sortByAlphabet(pizzas, order);
-
-      default:
-        return this._sortByRating(pizzas, order);
-    }
-  };
-
-  getPizzas(filter, sortBy, order) {
-    const sortedPizzas = this._sortByCategory(sortBy, order, this._data.pizzas);
-    let filteredPizzas;
-
-    if (filter === 0) {
-      filteredPizzas = sortedPizzas;
-    } else {
-      filteredPizzas = sortedPizzas.filter(
-        (pizza) => pizza.category === filter
-      );
-    }
-
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // if (Math.random() > 0.75) {
-        //   reject(new Error('Something bad happened'));
-        // } else {
-        resolve({
-          pizzas: filteredPizzas,
-          activeBases: this._getActiveBases(),
-          activeSizes: this._getActiveSizes(),
-        });
-        // }
-      }, 700);
-    });
-  }
-
-  getCategories() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          filterCategories: this._data.filterCategories,
-          sortCategories: this._data.sortCategories,
-        });
-      }, 700);
-    });
-  }
 }
