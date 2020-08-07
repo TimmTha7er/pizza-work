@@ -5,7 +5,7 @@ import logo from '../../img/header/header-logo.png';
 
 const Logo = () => {
   return (
-    <Link to='/' className='logo link'>
+    <Link to='/' className='logo header__logo link'>
       <img className='logo__img' src={logo} alt='logo' />
       <div className='logo__text'>
         <h1 className='logo__title'>react pizza</h1>
