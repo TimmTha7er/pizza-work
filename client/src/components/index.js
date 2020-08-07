@@ -1,5 +1,3 @@
-export { default as EditPizza } from './Admin/EditPizza';
-
 export { default as Header } from './Header/Header';
 export { default as Logo } from './Header/Logo';
 export { default as UserBar } from './Header/UserBar';
@@ -35,5 +33,7 @@ export { default as Footer } from './Footer';
 export { default as EditFilters } from './Admin/EditFilters';
 export { default as Login } from './Admin/Login';
 export { default as Ordering } from './Admin/Ordering';
+export { default as EditPizza } from './Admin/EditPizza';
+export { default as Profile } from './Admin/Profile';
 
 export { default as App } from './App';

@@ -1,9 +1,109 @@
-import React from "react";
+import React from 'react';
 
 const EditPizza = () => {
-	return (
-		<h1>Edit Pizza</h1>
-	)
-}
+  return (
+    <div class='edit-pizza page'>
+      <div class='container edit-pizza__container'>
+        <h2 class='edit-pizza__title'>Редактирование пиццы</h2>
+        <form action='' class='pizza-form'>
+          <label for='' class='pizza-form__label'>
+            Ссылка на картинку
+          </label>
+          <input type='text' class='pizza-form__input input' />
+          <label for='' class='pizza-form__label'>
+            Название
+          </label>
+          <input type='text' class='pizza-form__input input' />
+          <label for='' class='pizza-form__label'>
+            Цена
+          </label>
+          <input type='text' class='pizza-form__input input' />
+
+          <label for='' class='pizza-form__label'>
+            Категория
+          </label>
+          {/* <!-- <input type="text" class="pizza-form__input input" /> --> */}
+
+          <div class='pizza-form__select-wrap'>
+            <select class='select' name='filters'>
+              <option value='Все'> Все </option>
+              <option value='Мясные'> Мясные </option>
+              <option value='Вегатарианские'> Вегатарианские </option>
+              <option value='Гриль'> Гриль </option>
+              <option value='Острые'> Острые </option>
+            </select>
+          </div>
+
+          <label for='' class='pizza-form__label'>
+            Рейтинг
+          </label>
+          <input type='text' class='pizza-form__input input' />
+
+          <fieldset class='pizza-form__bases'>
+            <legend class='pizza-form__legend'>Доступные основы:</legend>
+            <input
+              class='pizza-form__checkbox visually-hidden'
+              type='checkbox'
+              name='тонкое'
+              id='base-thin'
+            />
+            <label for='base-thin' class='pizza-form__ch-b-label'>
+              Тонкое
+            </label>
+            <input
+              class='pizza-form__checkbox visually-hidden'
+              type='checkbox'
+              name='Традиционное'
+              id='base-traditional'
+            />
+            <label for='base-traditional' class='pizza-form__ch-b-label'>
+              Традиционное
+            </label>
+          </fieldset>
+
+          <fieldset class='pizza-form__sizes'>
+            <legend class='pizza-form__legend'>Доступные размеры:</legend>
+            <input
+              class='pizza-form__checkbox visually-hidden'
+              type='checkbox'
+              name='26 см.'
+              id='size-26'
+            />
+            <label for='size-26' class='pizza-form__ch-b-label'>
+              26 см.
+            </label>
+            <input
+              class='pizza-form__checkbox visually-hidden'
+              type='checkbox'
+              name='30 см.'
+              id='size-30'
+            />
+            <label for='size-30' class='pizza-form__ch-b-label'>
+              30 см.
+            </label>
+            <input
+              class='pizza-form__checkbox visually-hidden'
+              type='checkbox'
+              name='40 см.'
+              id='size-40'
+            />
+            <label for='size-40' class='pizza-form__ch-b-label'>
+              40 см.
+            </label>
+          </fieldset>
+
+          <div class='pizza-form__btns'>
+            <a href='' class='button button_grey pizza-form__cansel-btn'>
+              Отмена
+            </a>
+            <a href='' class='button button_grey pizza-form__save-btn'>
+              Сохранить
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default EditPizza;

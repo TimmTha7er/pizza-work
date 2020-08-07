@@ -1,0 +1,177 @@
+// ----------------------------------------------
+//		edit pizza
+// ----------------------------------------------
+.edit-pizza {
+  &__container {
+    max-width: 425px;
+
+    @media only screen and (max-width: 1200px) {
+      max-width: 425px;
+    }
+  }
+}
+
+.pizza-form {
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  &__ch-b-label {
+    position: relative;
+    margin-right: 45px;
+    padding-left: 35px;
+    user-select: none;
+    cursor: pointer;
+
+    @media only screen and (max-width: 768px) {
+      margin-right: 30px;
+    }
+    @media only screen and (max-width: 480px) {
+      margin-right: 15px;
+    }
+  }
+
+  &__input {
+    margin-bottom: 15px;
+  }
+
+  &__checkbox {
+    /* создание своего чекбокса */
+    & + label::before,
+    & + label::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 22px;
+      height: 22px;
+      margin-right: 9px;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      transition: border-color 0.25s ease, background-colo 0.25s ease;
+    }
+
+    & + label::after {
+      top: 12px;
+      opacity: 0;
+      visibility: hidden;
+      width: 12px;
+      height: 12px;
+      margin: -7px 0px 0px 5px;
+      background-color: rgb(255, 105, 0);
+    }
+
+    /* при наведении курсора на checkbox */
+    &:not(:disabled):not(:checked) + label:hover::before {
+      border-color: $accent-color;
+    }
+
+    /* для активного чекбокса (при нажатии на него) */
+    &:not(:disabled):active + label::before {
+      border-width: 2px;
+    }
+
+    /* для чекбокса, находящегося в фокусе */
+    &:focus + label::before {
+      box-shadow: 0 0 0 0.2rem rgba(255, 105, 0, 0.15);
+    }
+
+    /* для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+    &:focus:not(:checked) + label::before {
+      border-width: 2px;
+    }
+
+    /* для чекбокса, находящегося в состоянии checked */
+    &:checked + label::after {
+      opacity: 1;
+      visibility: visible;
+    }
+    &:checked + label::before {
+      border-color: rgba(255, 105, 0, 0.4);
+    }
+
+    /* для чекбокса, находящегося в состоянии disabled */
+    &:disabled + label::before {
+      background-color: #e9ecef;
+    }
+  }
+
+  &__sizes {
+    margin-bottom: 30px;
+  }
+
+  &__bases {
+    margin-bottom: 25px;
+  }
+
+  &__legend {
+    margin-bottom: 10px;
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__select-wrap {
+    margin-bottom: 15px;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 1px;
+      right: 30px;
+      width: 1px;
+      height: 33px;
+      background-color: #ccc;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    &:after {
+      content: '';
+      border-style: solid;
+      border-width: 5px 5px 0 5px;
+      border-color: #333 transparent transparent transparent;
+      pointer-events: none;
+
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      z-index: 1;
+      margin-top: -2px;
+    }
+  }
+}
+
+.select {
+  width: 100%;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(115, 121, 140, 0.32);
+  background-color: #fff;
+  appearance: none;
+
+  /* Убираем стандартные стрелочки в IE */
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:focus {
+    outline: 0;
+    // border-color: #2cb0d8;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  & > option:hover {
+    background-color: red;
+  }
+}
