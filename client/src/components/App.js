@@ -1,18 +1,17 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import '../scss/index.scss';
-import { Home, Cart, Auth } from '../pages';
 import {
-  Header,
-  Footer,
-  NotFound,
-  CartEmpty,
+  Home,
+  Cart,
+  Auth,
+  Login,
+  Profile,
+  Ordering,
   EditPizza,
   EditFilters,
-  Login,
-  Ordering,
-  Profile
-} from './';
+} from '../pages';
+import { Header, Footer, NotFound, CartEmpty } from './';
 
 // TODO
 // 1
@@ -36,12 +35,12 @@ import {
 // или с помощью https://stripe.com/docs/stripe-js/react
 
 const App = () => {
-  const isAuth = true;
-  let adminContent = null;
+  // const isAuth = true;
+  // let adminContent = null;
 
-  if (isAuth) {
-    adminContent = <Route path='/edit-pizza' component={EditPizza} />;
-  }
+  // if (isAuth) {
+  //   adminContent = <Route path='/edit-pizza' component={EditPizza} />;
+  // }
 
   return (
     <div className='main-wrapper'>
@@ -52,17 +51,16 @@ const App = () => {
           <Route path='/auth' component={Auth} />
           <Route path='/cart' component={Cart} />
           <Route path='/empty-cart' component={CartEmpty} />
-          {adminContent}
+          <Route path='/login' component={Login} />
+          <Route path='/ordering' component={Ordering} />
+          <Route path='/profile' component={Profile} />
+          <Route path='/pizza' component={EditPizza} />
+          <Route path='/filter' component={EditFilters} />
+          {/* {adminContent} */}
+
           <Route component={NotFound} />
         </Switch>
       </main>
-
-      <EditFilters />
-      <Login />
-      <Ordering />
-      <EditPizza />
-      <Profile />
-
       <Footer />
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const EditPizza = () => {
   return (
@@ -6,20 +7,20 @@ const EditPizza = () => {
       <div class='container edit-pizza__container'>
         <h2 class='edit-pizza__title'>Редактирование пиццы</h2>
         <form action='' class='pizza-form'>
-          <label for='' class='pizza-form__label'>
+          <label htmlFor='' class='pizza-form__label'>
             Ссылка на картинку
           </label>
           <input type='text' class='pizza-form__input input' />
-          <label for='' class='pizza-form__label'>
+          <label htmlFor='' class='pizza-form__label'>
             Название
           </label>
           <input type='text' class='pizza-form__input input' />
-          <label for='' class='pizza-form__label'>
+          <label htmlFor='' class='pizza-form__label'>
             Цена
           </label>
           <input type='text' class='pizza-form__input input' />
 
-          <label for='' class='pizza-form__label'>
+          <label htmlFor='' class='pizza-form__label'>
             Категория
           </label>
           {/* <!-- <input type="text" class="pizza-form__input input" /> --> */}
@@ -34,7 +35,7 @@ const EditPizza = () => {
             </select>
           </div>
 
-          <label for='' class='pizza-form__label'>
+          <label htmlFor='' class='pizza-form__label'>
             Рейтинг
           </label>
           <input type='text' class='pizza-form__input input' />
@@ -47,7 +48,7 @@ const EditPizza = () => {
               name='тонкое'
               id='base-thin'
             />
-            <label for='base-thin' class='pizza-form__ch-b-label'>
+            <label htmlFor='base-thin' class='pizza-form__ch-b-label'>
               Тонкое
             </label>
             <input
@@ -56,7 +57,7 @@ const EditPizza = () => {
               name='Традиционное'
               id='base-traditional'
             />
-            <label for='base-traditional' class='pizza-form__ch-b-label'>
+            <label htmlFor='base-traditional' class='pizza-form__ch-b-label'>
               Традиционное
             </label>
           </fieldset>
@@ -69,7 +70,7 @@ const EditPizza = () => {
               name='26 см.'
               id='size-26'
             />
-            <label for='size-26' class='pizza-form__ch-b-label'>
+            <label htmlFor='size-26' class='pizza-form__ch-b-label'>
               26 см.
             </label>
             <input
@@ -78,7 +79,7 @@ const EditPizza = () => {
               name='30 см.'
               id='size-30'
             />
-            <label for='size-30' class='pizza-form__ch-b-label'>
+            <label htmlFor='size-30' class='pizza-form__ch-b-label'>
               30 см.
             </label>
             <input
@@ -87,18 +88,18 @@ const EditPizza = () => {
               name='40 см.'
               id='size-40'
             />
-            <label for='size-40' class='pizza-form__ch-b-label'>
+            <label htmlFor='size-40' class='pizza-form__ch-b-label'>
               40 см.
             </label>
           </fieldset>
 
           <div class='pizza-form__btns'>
-            <a href='' class='button button_grey pizza-form__cansel-btn'>
+            <Link to='/' class='button button_grey pizza-form__cansel-btn'>
               Отмена
-            </a>
-            <a href='' class='button button_grey pizza-form__save-btn'>
+            </Link>
+            <Link to='/' class='button button_grey pizza-form__save-btn'>
               Сохранить
-            </a>
+            </Link>
           </div>
         </form>
       </div>

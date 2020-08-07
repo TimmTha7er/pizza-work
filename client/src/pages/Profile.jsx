@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   return (
@@ -39,12 +40,12 @@ const Profile = () => {
           ></textarea>
 
           <div class='profile-form__btns'>
-            <a href='' class='button button_grey profile-form__btn'>
+            <Link to='/' class='button button_grey profile-form__btn'>
               Выйти
-            </a>
-            <a href='' class='button button_grey profile-form__btn'>
+            </Link>
+            <Link to='/' class='button button_grey profile-form__btn'>
               Сохранить
-            </a>
+            </Link>
           </div>
         </form>
       </div>

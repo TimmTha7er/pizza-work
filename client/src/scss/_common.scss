@@ -145,11 +145,15 @@ h4 {
   overflow: hidden;
 }
 
+a {
+  outline: none !important;
+}
+
 .link {
   text-decoration: none;
   color: $text-color;
   transition: color 0.25s ease;
-  outline: none;
+  // outline: none;
 
   &:link {
   }

@@ -4,26 +4,26 @@ import logo from '../img/header/header-logo.png';
 
 const Footer = () => {
   return (
-    <footer class='footer'>
-      <div class='container footer__container'>
-        <Link to='/' class='logo link footer__logo'>
-          <img class='logo__img' src={logo} alt='logo' />
-          <h2 class='logo__title footer__title'>React Pizza</h2>
+    <footer className='footer'>
+      <div className='container footer__container'>
+        <Link to='/' className='logo link footer__logo'>
+          <img className='logo__img' src={logo} alt='logo' />
+          <h2 className='logo__title footer__title'>React Pizza</h2>
         </Link>
-        <div class='footer-legal'>
-          <div class='footer-legal__left-col'>
-            <div class='footer-legal__copyright'>© 2020</div>
-            <div class='footer-legal__link-list'>
-              <Link href='' class='footer-legal__link link'>
+        <div className='footer-legal'>
+          <div className='footer-legal__left-col'>
+            <div className='footer-legal__copyright'>© 2020</div>
+            <div className='footer-legal__link-list'>
+              <Link to='/' className='footer-legal__link link'>
                 Правовая информация
               </Link>
-              <Link href='' class='footer-legal__link link'>
+              <Link to='/' className='footer-legal__link link'>
                 Аллергены и информация о питании
               </Link>
             </div>
           </div>
-          <div class='footer-legal__right-col'>
-            <div class='footer-legal__feedback'>feedback@dodopizza.by</div>
+          <div className='footer-legal__right-col'>
+            <div className='footer-legal__feedback'>feedback@dodopizza.by</div>
           </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ const Cart = ({ totalCount, totalPrice, onClear }) => {
           >
             Вернуться <span className='button_hidden'>назад</span>
           </Link>
-          <Link to='/' className='button cart__pay-btn'>
+          <Link to='/ordering' className='button cart__pay-btn'>
             Оплатить <span className='button_hidden'>сейчас</span>
           </Link>
         </div>

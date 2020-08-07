@@ -2,9 +2,17 @@ export { default as Header } from './Header/Header';
 export { default as Logo } from './Header/Logo';
 export { default as UserBar } from './Header/UserBar';
 
+export { default as Footer } from './Footer';
+
 export { default as CartItem } from './Cart/CartItem';
 export { default as CartEmpty } from './Cart/CartEmpty';
 export { default as CartItemList } from './Cart/CartItemList';
+
+export { default as Checkout } from './Ordering/Checkout';
+export { default as CheckoutList } from './Ordering/CheckoutList';
+export { default as CheckoutItem } from './Ordering/CheckoutItem';
+export { default as Payment } from './Ordering/Payment';
+export { default as Delivery } from './Ordering/Delivery';
 
 export { default as Categories } from './Categories/Categories';
 export { default as Sort } from './Categories/Sort';
@@ -27,13 +35,5 @@ export {
   PizzaStoreServiceProvider,
   PizzaStoreServiceConsumer,
 } from './supports/PizzaStoreServiceContext';
-
-export { default as Footer } from './Footer';
-
-export { default as EditFilters } from './Admin/EditFilters';
-export { default as Login } from './Admin/Login';
-export { default as Ordering } from './Admin/Ordering';
-export { default as EditPizza } from './Admin/EditPizza';
-export { default as Profile } from './Admin/Profile';
 
 export { default as App } from './App';
