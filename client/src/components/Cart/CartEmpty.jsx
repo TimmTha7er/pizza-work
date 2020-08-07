@@ -9,7 +9,7 @@ const CartEmpty = ({ totalCount }) => {
   }
 
   return (
-    <section className='empty-cart'>
+    <div className='empty-cart page'>
       <div className='container empty-cart__container'>
         <h2 className='empty-cart__title'>Корзина пуста</h2>
         <p className='empty-cart__text'>
@@ -29,7 +29,7 @@ const CartEmpty = ({ totalCount }) => {
           Вернуться назад
         </Link>
       </div>
-    </section>
+    </div>
   );
 };
 
