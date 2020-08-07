@@ -1,0 +1,89 @@
+// ----------------------------------------------
+//		filters
+// ----------------------------------------------
+.filters {  
+  &__container {
+    max-width: 625px;
+
+    @media only screen and (max-width: 1200px) {
+      max-width: 425px;
+    }
+  }
+}
+
+.filters-form {
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    margin-bottom: 35px;
+
+    &_edit {
+      border: none;
+      border-radius: 0;
+      margin-bottom: 0;
+      background-color: rgba(115, 121, 140, 0.12);
+    }
+
+    &_add {
+      flex: 0 0 70%;
+      margin-bottom: 0;
+      border: none;
+      border-radius: 0;
+      border-top: none;
+    }
+  }
+
+  &__add-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 35px;
+    border: 1px solid rgba(115, 121, 140, 0.32);
+    border-top: none;
+  }
+
+  &__btn {
+    flex: 0 0 30%;
+    border: none;
+    background-color: rgba(115, 121, 140, 0.32);
+
+    &_save {
+      flex: 0 0 5%;
+      background-color: transparent;
+    }
+  }
+}
+
+.filters-list {
+  border: 1px solid rgba(115, 121, 140, 0.32);
+  border-top: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid rgba(115, 121, 140, 0.32);
+
+    &:hover {
+      .filters-list__btns-block {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__item-text {
+    padding: 12px 15px;
+  }
+
+  &__btns-block {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  &__btn {
+    border: none;
+    background-color: transparent;
+  }
+}

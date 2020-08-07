@@ -2,7 +2,14 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import '../scss/index.scss';
 import { Home, Cart, Auth } from '../pages';
-import { Header, Footer, NotFound, CartEmpty, EditPizza } from './';
+import {
+  Header,
+  Footer,
+  NotFound,
+  CartEmpty,
+  EditPizza,
+  EditFilters,
+} from './';
 
 // TODO
 // 1
@@ -46,6 +53,9 @@ const App = () => {
           <Route component={NotFound} />
         </Switch>
       </main>
+
+      <EditFilters />
+
       <Footer />
     </div>
   );
