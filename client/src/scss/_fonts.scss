@@ -54,4 +54,16 @@
   font-display: swap;
 }
 
+// ----------- Mercury114 -----------
+@font-face {
+  font-family: 'Mercury114';
+  src: local('Mercury114'), local('Mercury 114'),
+    url('../fonts/Mercury114/mercury114.woff2') format('woff2'),
+    url('../fonts/Mercury114/mercury114.woff') format('woff'),
+    url('../fonts/Mercury114/mercury114.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 
