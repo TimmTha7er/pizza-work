@@ -1,3 +1,69 @@
 // ----------------------------------------------
 //		footer
 // ----------------------------------------------
+.footer {
+  padding: 20px 0 35px 0;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgb(69, 75, 84);
+	border-radius: 0 0 10px 10px;
+	
+  &__logo {
+		margin-bottom: 15px;
+		color: rgba(255, 255, 255, 0.7);
+  }
+
+  &__title {
+    margin: 10px 0 0 10px;
+    font-size: 22px;
+  }
+}
+
+.footer-legal {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media only screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+
+  &__left-col {
+    @media only screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+    }
+	}
+	
+	&__copyright {
+		display: inline-block;
+
+		@media only screen and (max-width: 768px) {
+			margin-bottom: 5px;
+    }
+	}
+
+  &__link {
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 20px;
+
+    @media only screen and (max-width: 768px) {
+			margin-left: 0px;
+			margin-bottom: 5px;
+    }
+  }
+
+  &__link-list {
+    display: inline-block;
+
+    @media only screen and (max-width: 992px) {
+      margin-bottom: 15px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      margin-left: 0px;
+    }
+  }
+}

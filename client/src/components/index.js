@@ -30,4 +30,6 @@ export {
   PizzaStoreServiceConsumer,
 } from './supports/PizzaStoreServiceContext';
 
+export { default as Footer } from './Footer';
+
 export { default as App } from './App';

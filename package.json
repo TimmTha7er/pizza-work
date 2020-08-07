@@ -4,6 +4,7 @@
   "description": "node js server for pizza shop",
   "main": "app.js",
   "scripts": {
+    "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js ",
     "client": "npm run start --prefix client",

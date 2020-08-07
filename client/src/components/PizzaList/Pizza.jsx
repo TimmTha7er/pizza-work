@@ -21,7 +21,7 @@ const Pizza = ({
       <div className='pizza__img-wrap'>
         <img className='pizza__img' src={imageUrl} alt='pizza' />
       </div>
-      <div className='pizza__name'>{name}</div>
+      <h3 className='pizza__name'>{name}</h3>
       <div className='pizza__options'>
         <PizzaBaseList
           bases={bases}

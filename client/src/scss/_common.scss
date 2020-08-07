@@ -15,10 +15,11 @@ html {
 // ----------------------------------------------
 body {
   font-size: 16px;
-  line-height: 1, 1875;
+  line-height: 1;
   font-family: 'Proxima Nova', Roboto, sans-serif;
   color: $text-color;
   overflow-x: hidden;
+  min-width: 320px;
   background-color: #ffdf8c;
   padding: 45px;
 
@@ -34,52 +35,47 @@ body {
   @media only screen and (max-width: 480px) {
     padding: 5px;
   }
-
 }
 
-.hidden {
-  display: none;
-}
-
-.link {
-  text-decoration: none;
-  color: $text-color;
-  transition: color 0.25s ease;
-  outline: none;
-
-  &:link {
-    outline: none;
-  }
-  &:visited {
-  }
-  &:hover {
-    color: $accent-color;
-  }
-  &:active {
-    color: $accent-color;
-  }
-}
-
-.container {
+.main-wrapper {
   max-width: 1340px;
   margin: 0 auto;
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.03);
   border-radius: 10px;
 
   @media only screen and (max-width: 1200px) {
     max-width: none;
-    padding: 0 15px;
-    // max-width: 970px;
   }
-  // @media only screen and (max-width: 992px) {
-  //   max-width: 750px;
-  // }
+}
+
+.container {
+  max-width: 1290px;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  @media only screen and (max-width: 1200px) {
+    max-width: none;
+  }
   @media only screen and (max-width: 768px) {
     padding: 0 10px;
   }
   @media only screen and (max-width: 480px) {
     padding: 0 5px;
+  }
+}
+
+.page {
+  padding: 95px 0;
+
+  @media only screen and (max-width: 992px) {
+    padding: 55px 0;
+  }
+  @media only screen and (max-width: 768px) {
+    padding: 45px 0;
+  }
+  @media only screen and (max-width: 480px) {
+    padding: 35px 0;
   }
 }
 
@@ -104,23 +100,29 @@ h1 {
 
 h2 {
   font-size: 32px;
+  margin-bottom: 35px;
 
   @media only screen and (max-width: 768px) {
     font-size: 28px;
+    margin-bottom: 25px;
   }
   @media only screen and (max-width: 480px) {
     font-size: 24px;
+    margin-bottom: 15px;
   }
 }
 
 h3 {
   font-size: 22px;
+  margin-bottom: 30px;
 
   @media only screen and (max-width: 768px) {
     font-size: 18px;
+    margin-bottom: 25px;
   }
   @media only screen and (max-width: 480px) {
     font-size: 16px;
+    margin-bottom: 20px;
   }
 }
 
@@ -128,29 +130,101 @@ h4 {
   font-size: 16px;
 }
 
+.hidden {
+  display: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.link {
+  text-decoration: none;
+  color: $text-color;
+  transition: color 0.25s ease;
+  outline: none;
+
+  &:link {
+  }
+  &:visited {
+  }
+  &:hover {
+    color: $accent-color;
+  }
+  &:active {
+    color: $accent-color;
+  }
+}
+
+.input {
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(115, 121, 140, 0.32);
+  padding: 0px 15px;
+  font-size: 16px;
+  line-height: 40px;
+  outline: none;
+  transition: border-color 0.25s ease;
+
+  &_last {
+    margin-bottom: 5px;
+  }
+
+  &:focus {
+    border-color: $accent-color;
+  }
+}
+
 .button {
   font-size: 16px;
-  padding: 20px 34px 16px 34px;
+  padding: 14px 20px 14px 20px;
   background-color: $accent-color;
   border-radius: 30px;
   color: #fff;
   text-decoration: none;
+  outline: none;
+  border: none;
   user-select: none;
   cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
 
   @media only screen and (max-width: 768px) {
-    padding: 15px 29px 11px 29px;
+    padding: 12px 20px 12px 20px;
   }
-  @media only screen and (max-width: 480px) {
-    // padding: 10px 24px 6px 24px;
-  }
-}
 
-@media only screen and (max-width: 1200px) {
-}
-@media only screen and (max-width: 992px) {
-}
-@media only screen and (max-width: 768px) {
-}
-@media only screen and (max-width: 480px) {
+  &_hidden {
+    @media only screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    background-color: rgb(217, 99, 52);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+  }
+  &:active {
+    background-color: $accent-color;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  &_grey {
+    border: 1px solid $text-lighter;
+    color: $text-lighter;
+    background-color: transparent;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.01);
+    }
+    &:active {
+      box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
 }

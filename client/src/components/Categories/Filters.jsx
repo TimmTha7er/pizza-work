@@ -4,13 +4,13 @@ import cln from 'classnames';
 import { connect } from 'react-redux';
 import { setFilterCategory } from '../../redux/actions';
 
-const Filters = ({ items, filter, onFilterClick, pizzas }) => {
+const Filters = ({ items, filter, onFilterClick }) => {
   const [activeItem, setActiveItem] = useState(filter);
 
   const onItemClick = (index) => () => {
     if (activeItem !== index) {
       setActiveItem(index);
-      onFilterClick(index, pizzas);
+      onFilterClick(index);
     }
   };
 
@@ -35,14 +35,10 @@ const Filters = ({ items, filter, onFilterClick, pizzas }) => {
   );
 };
 
-const mapStateToProps = ({
-  categories: { filter, filterCategories },
-  pizzasList: { pizzas },
-}) => {
+const mapStateToProps = ({ categories: { filter, filterCategories } }) => {
   return {
     items: filterCategories,
     filter,
-    pizzas,
   };
 };
 
