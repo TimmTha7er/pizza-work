@@ -11,7 +11,7 @@ const Cart = ({ totalCount, totalPrice, onClear }) => {
   }
 
   return (
-    <section className='cart page'>
+    <div className='cart page'>
       <div className='container cart__container'>
         <div className='cart__top-line'>
           <h2 className='cart__title icon-basket'>Корзина</h2>
@@ -45,7 +45,7 @@ const Cart = ({ totalCount, totalPrice, onClear }) => {
           </Link>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

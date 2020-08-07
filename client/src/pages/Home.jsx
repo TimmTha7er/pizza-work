@@ -6,13 +6,15 @@ const Home = ({ title }) => {
   const pizzaStoreService = useContext(pizzaStoreContext);
 
   return (
-    <section className='content'>
-      <Categories pizzaStoreService={pizzaStoreService} />
-      <div className='content__body'>
-        <h2 className='content__title'>{title} пиццы</h2>
-        <PizzasList pizzaStoreService={pizzaStoreService} />
+    <div className='content'>
+      <div className='container container__content'>
+        <Categories pizzaStoreService={pizzaStoreService} />
+        <div className='content__body'>
+          <h2 className='content__title'>{title} пиццы</h2>
+          <PizzasList pizzaStoreService={pizzaStoreService} />
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
