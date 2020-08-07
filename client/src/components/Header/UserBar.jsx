@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 const UserBar = ({ totalCount, totalPrice }) => {
   return (
     <div class='user-bar'>
-      <button class='button button_grey user-bar__login-btn'>Войти</button>
+      <Link to='/' class='button button_grey user-bar__login-btn'>
+        Войти
+      </Link>
 
       <Link to='/cart' class='button cart-btn'>
         <div class='cart-btn__summ icon-rouble'>{totalPrice}</div>

@@ -7,11 +7,11 @@ import { allPizzasRemovedFromCart } from '../redux/actions';
 
 const Cart = ({ totalCount, totalPrice, onClear }) => {
   if (totalCount < 1) {
-    return <Redirect to="/empty-cart"/>;
+    return <Redirect to='/empty-cart' />;
   }
 
   return (
-    <section className='cart'>
+    <section className='cart page'>
       <div className='container cart__container'>
         <div className='cart__top-line'>
           <h2 className='cart__title icon-basket'>Корзина</h2>
@@ -34,11 +34,14 @@ const Cart = ({ totalCount, totalPrice, onClear }) => {
         </div>
 
         <div className='cart__btns-block'>
-          <Link to='/' className='cart__btn-back button icon-left-open'>
-            Вернуться <span className='cart__btn-back_hidden'>назад</span>
+          <Link
+            to='/'
+            className='button_grey button cart__back-btn icon-left-open'
+          >
+            Вернуться <span className='button_hidden'>назад</span>
           </Link>
-          <Link to='/' className='cart__btn-pay button'>
-            Оплатить <span className='cart__btn-pay_hidden'>сейчас</span>
+          <Link to='/' className='button cart__pay-btn'>
+            Оплатить <span className='button_hidden'>сейчас</span>
           </Link>
         </div>
       </div>
