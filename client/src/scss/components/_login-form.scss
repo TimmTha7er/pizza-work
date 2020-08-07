@@ -1,0 +1,32 @@
+// ----------------------------------------------
+//		login-form
+// ----------------------------------------------
+.login {
+  &__container {
+    max-width: 345px;
+
+    @media only screen and (max-width: 1200px) {
+      max-width: 345px;
+    }
+  }
+}
+
+.login-form {
+  &__inputs {
+    margin-bottom: 30px;
+  }
+
+  &__input {
+    margin-bottom: 15px;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+  }
+}

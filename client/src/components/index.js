@@ -34,6 +34,7 @@ export { default as Footer } from './Footer';
 
 
 export { default as EditFilters } from './Admin/EditFilters';
+export { default as Login } from './Admin/Login';
 
 
 export { default as App } from './App';
