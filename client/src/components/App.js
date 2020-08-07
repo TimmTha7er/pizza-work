@@ -9,7 +9,8 @@ import {
   CartEmpty,
   EditPizza,
   EditFilters,
-  Login
+  Login,
+  Ordering
 } from './';
 
 // TODO
@@ -57,6 +58,7 @@ const App = () => {
 
       <EditFilters />
       <Login />
+      <Ordering />
 
       <Footer />
     </div>

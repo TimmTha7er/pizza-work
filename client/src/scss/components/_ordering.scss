@@ -1,0 +1,213 @@
+// ----------------------------------------------
+//		ordering
+// ----------------------------------------------
+.ordering {
+  position: relative;
+
+  &__container {
+    max-width: 1025px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @media only screen and (max-width: 768px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__delivery {
+    margin-bottom: 50px;
+
+    @media only screen and (max-width: 768px) {
+      margin-bottom: 30px;
+    }
+    @media only screen and (max-width: 480px) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__left-col {
+    flex: 0 0 50%;
+
+    @media only screen and (max-width: 992px) {
+      flex: 0 0 55%;
+    }
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  &__right-col {
+    flex: 0 0 40%;
+    position: sticky;
+    margin-top: 60px;
+    top: 40px;
+    right: 0px;
+
+    @media only screen and (max-width: 768px) {
+      position: static;
+      margin-top: 0px;
+      margin: 0 auto 35px auto;
+    }
+  }
+}
+
+.delivery {
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    margin-bottom: 15px;
+    max-width: 305px;
+  }
+
+  &__textarea {
+    width: 100%;
+    min-height: 75px;
+    outline: none;
+    resize: none;
+  }
+}
+
+// ----------------------------------------------
+//		checkout
+// ----------------------------------------------
+.checkout {
+  font-family: 'Mercury114', 'Arial Narrow', Arial, sans-serif;
+  padding: 25px;
+  max-width: 370px;
+  min-width: 290px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 30px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 20px;
+  }
+  @media only screen and (max-width: 480px) {
+    padding: 15px;
+  }
+
+  &__list {
+    margin-bottom: 55px;
+
+    @media only screen and (max-width: 768px) {
+      margin-bottom: 35px;
+    }
+    @media only screen and (max-width: 480px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+
+  &__item-name {
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+
+  &__item-size {
+    font-size: 14px;
+  }
+
+  &__item-base {
+    font-size: 14px;
+  }
+
+  &__item-price {
+    position: relative;
+    font-size: 20px;
+    font-weight: 700;
+    padding-right: 25px;
+
+    &::before {
+      position: absolute;
+      right: 0;
+      top: 3px;
+    }
+  }
+
+  &__total-price {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__total-amount {
+    position: relative;
+    font-size: 20px;
+    font-weight: 700;
+    padding-right: 25px;
+
+    &::before {
+      position: absolute;
+      right: 0;
+      top: 3px;
+    }
+  }
+}
+
+// ----------------------------------------------
+//		payment
+// ----------------------------------------------
+.payment {
+  background: rgb(241, 242, 245);
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 4px 30px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 15px;
+  }
+  @media only screen and (max-width: 480px) {
+    padding: 10px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+
+    @media only screen and (max-width: 768px) {
+      margin-bottom: 15px;
+    }
+    @media only screen and (max-width: 480px) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__btns-block {
+    display: flex;
+    justify-content: space-between;
+
+    @media only screen and (max-width: 480px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__btn-back {
+  
+  }
+
+  &__btn-checkout {
+    @media only screen and (max-width: 480px) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__input {
+    margin-bottom: 15px;
+
+    &_validity {
+      flex: 0 0 68%;
+    }
+
+    &_cvc {
+      flex: 0 0 30%;
+    }
+  }
+}
