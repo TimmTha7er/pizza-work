@@ -41,6 +41,14 @@ router.get('/', (req, res) => {
   }
 });
 
+// @route GET api/pizzas/:id
+// @descr Get One Pizza
+// @Access Private
+router.get('/:id', (req, res) => {
+  Pizzas.findOne({ id: req.params.id })
+    .then((item) => res.json( item ))
+});
+
 // @route POST api/pizzas
 // @descr Create A Pizza
 // @Access Private
@@ -69,5 +77,18 @@ router.delete('/:id', (req, res) => {
     .then((pizza) => pizza.remove().then(() => res.json({ success: true })))
     .catch((err) => res.status(404).json({ success: false }));
 });
+
+// @route PATCH api/pizzas/:id
+// @descr UPDATE A Pizza
+// @Access Private
+router.patch('/:id', async (req, res) => {
+  try {
+    await Pizzas.findByIdAndUpdate(req.params.id, req.body)
+    await Pizzas.save()
+    res.send(food)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
 
 module.exports = router;

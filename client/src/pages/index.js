@@ -5,4 +5,5 @@ export { default as Login } from './Login';
 export { default as Profile } from './Profile';
 export { default as Ordering } from './Ordering';
 export { default as EditPizza } from './EditPizza';
+export { default as AddPizza } from './AddPizza';
 export { default as EditFilters } from './EditFilters';

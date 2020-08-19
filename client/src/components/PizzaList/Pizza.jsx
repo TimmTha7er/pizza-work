@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { PizzaBaseList, PizzaSizeList, PizzaButton } from '../../components';
 
 const Pizza = ({
@@ -18,6 +19,10 @@ const Pizza = ({
 
   return (
     <div className='pizza content__pizza'>
+      <div className='pizza__admin-btns-block'>
+        <Link className="pizza__btn icon-edit" to={`/pizza/${id}`}></Link>
+        <button className="pizza__btn icon-trash-empty"></button>
+      </div>
       <div className='pizza__img-wrap'>
         <img className='pizza__img' src={imageUrl} alt='pizza' />
       </div>

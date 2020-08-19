@@ -14,19 +14,24 @@ import {
 import { Header, Footer, NotFound, CartEmpty } from './';
 
 // TODO
+
+// добавить кнопки удаления, редактирования и добавления для пиццы
+// добавить кнопки удаления, редактирования и добавления для сортировки и фильтов
+// 
+
 // 1
 // продолжить https://www.youtube.com/watch?v=iI5h4-pChho&list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE&index=5
 
 // 2 Написать reducer и actions для редактирования пицц
 // 3 Написать reducer и actions для редактирования фильта и сорттировки
-// 6 Соединить все это с бэкэндом
+// 4 Соединить все это с бэкэндом
 
-// 7 Разобраться с логином и регистрацией на бэкэнде
-// 8 Разобраться с редюсером и экшенами для регистрации и логина
-// 9 Соединить все это
+// 5 Разобраться с логином и регистрацией на бэкэнде
+// 6 Разобраться с редюсером и экшенами для регистрации и логина
+// 7 Соединить все это
 
-// 11 добавить обработку ошибок
-// 12 сверстать NotFound, Spinner
+// 8 добавить обработку ошибок
+// 9 сверстать NotFound, Spinner
 
 // ?? возможно после всего подключить кассу
 // хорошее видео по внедрению платежей на сайт
@@ -54,7 +59,7 @@ const App = () => {
           <Route path='/login' component={Login} />
           <Route path='/ordering' component={Ordering} />
           <Route path='/profile' component={Profile} />
-          <Route path='/pizza' component={EditPizza} />
+          <Route path='/pizza/:id' component={EditPizza} />
           <Route path='/filter' component={EditFilters} />
           {/* {adminContent} */}
 

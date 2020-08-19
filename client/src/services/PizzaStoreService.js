@@ -27,8 +27,8 @@ export default class PizzaService {
     return activeSizes;
   }
 
-  _getResource = async (url) => {
-    const res = await fetch(url);
+  _getResource = async (url, method = 'GET') => {
+    const res = await fetch(url, { method });
 
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}` + `, received ${res.status}`);
@@ -47,6 +47,22 @@ export default class PizzaService {
       activeBases: this._getActiveBases(res),
       activeSizes: this._getActiveSizes(res),
     };
+  };
+
+  getPizza = async (id) => {
+    return await this._getResource(`/api/pizzas/${id}`);
+  };
+
+  deletePizza = async (id) => {
+    return await this._getResource(`/api/pizzas/${id}`, 'DELETE');
+  };
+
+  updatePizza = async (id) => {
+    return await this._getResource(`/api/pizzas/${id}`, 'PATCH');
+  };
+
+  createPizza = async () => {
+    return await this._getResource(`/api/pizzas/`, 'POST');
   };
 
   getCategories = async () => {
